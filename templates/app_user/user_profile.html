@@ -1,0 +1,439 @@
+{% extends "base.html" %}
+{% block title %}Profile - {{ block.super }}{% endblock %}
+
+{% block content %}
+  <div class="page content">
+    <!-- Repo Header -->
+    <div class="repo ribbon">
+      <div class="ui tabular menu">
+        <div class="ui container">
+          <a class="item">
+            <i class="person icon"></i> Profile
+          </a>
+          <a class="active item">
+            <i class="rss icon"></i> Activity
+          </a>
+          <a class="item">
+            <i class="gear icon"></i> Edit Profile &amp; Settings
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui grid container">
+      <div class="seven wide column">
+        <div class="ui segment no-radius segment-profile-reputation">
+          <div class="ui equal width grid grid-profile-reputation">
+            <div class="column">
+              <h5 class="ui mini grey header">REPUTATION</h5>
+              <div class="ui massive grey header" style="margin-top:0">
+                1,178 <label class="ui green small label">+2</label>
+                <div class="sub header">
+                  <a href="">top 2% this quarter</a>
+                </div>
+              </div>
+              <h5 class="ui mini grey header">Top tag</h5>
+              <label class="ui green link label">+2</label>
+              <label class="ui link label no-radius">django</label>
+            </div>
+            <div class="column">
+              <div class="quarter-graph">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
+              <h5 class="ui mini grey link header">
+                Next privilege
+                <div class="ui sub header right floated">
+                  1,500 Rep. <i class="ui gear grey mini icon"></i>
+                </div>
+              </h5>
+              <label class="ui link fluid label">django</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="six wide column">
+        <div class="ui segment no-radius segment-profile-badges">
+          <h5 class="ui mini grey header">BADGES</h5>
+          <div class="ui equal width grid grid-profile-badges">
+            <div class="column">
+              <span class="ui basic fluid yellow small label">
+                <i class="primitive dot yellow icon"></i> 5
+              </span>
+            </div>
+            <div class="column">
+              <span class="ui basic fluid grey small label">
+                <i class="primitive dot grey icon"></i> 23
+              </span>
+            </div>
+            <div class="column">
+              <span class="ui basic fluid brown small label">
+                <i class="primitive dot brown icon"></i> 46
+              </span>
+            </div>
+          </div>
+          <div class="ui equal width grid grid-profile-badges">
+            <div class="column">
+              <h5 class="ui mini grey header">Newest</h5>
+              <span class="ui fluid black small link label">
+                <i class="primitive dot grey icon"></i> Explainer
+              </span>
+            </div>
+            <div class="column">
+              <h5 class="ui mini grey link header">
+                Next badge
+                <div class="ui sub header right floated">
+                  42/100 <i class="ui gear grey mini icon"></i>
+                </div>
+              </h5>
+              <span class="ui basic fluid yellow small label">
+                <i class="primitive dot yellow icon"></i> Fanatic
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="three wide column">
+        <div class="ui segment no-radius segment-profile-impact">
+          <h4 class="ui mini grey header">IMPACT</h4>
+          <div class="ui big grey header" style="margin-top:0">
+            ~ 22k <div class="sub header">people reached</div>
+          </div>
+          <div class="ui list">
+            <div class="item">
+              <i class="triangle up grey icon"></i>
+              <div class="content">
+                <a href="" class="ui grey link color">30 votes cast</a>
+              </div>
+            </div>
+            <div class="item">
+              <i class="milestone grey icon"></i>
+              <div class="content">
+                <a href="" class="ui grey link color">1 helpful flag</a>
+              </div>
+            </div>
+            <div class="item">
+              <i class="pencil grey icon"></i>
+              <div class="content">
+                <a href="" class="ui grey link color">9 posts edited</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui container" style="margin-top:2em">
+      <div class="ui tabular menu">
+        <div class="ui container">
+          <a class="active item">
+            summary
+          </a>
+          <a class="item">
+            answers
+          </a>
+          <a class="item">
+            questions
+          </a>
+          <a class="item">
+            documentation
+          </a>
+          <a class="item">
+            tags
+          </a>
+          <a class="item">
+            badges
+          </a>
+          <a class="item">
+            favorites <label class="ui blue small label">2</label>
+          </a>
+          <a class="item">
+            bounties
+          </a>
+          <a class="item">
+            reputation <label class="ui blue small label">3</label>
+          </a>
+          <a class="item">
+            all actions
+          </a>
+          <a class="item">
+            responses <label class="ui blue small label">28</label>
+          </a>
+          <a class="item">
+            votes
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui grid container" style="margin-top: 1em;">
+      <div class="eight wide column">
+        <div class="ui secondary pointing menu">
+          <div class="ui container">
+            <a class="left floated item">
+              <strong>Answers (81)</strong>
+            </a>
+            <a class="item">
+              votes
+            </a>
+            <a class="active item">
+              activity
+            </a>
+            <a class="item">
+              newest
+            </a>
+          </div>
+        </div>
+        <div class="ui list list-box-items">
+          <a class="item no-underline">
+            <i class="ui answered icon">20</i>
+            <div class="content">
+              Implementing multiple profiles with django-all-auth
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui answered icon">38</i>
+            <div class="content">
+              How to customize user profile when using django-allauth
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui unanswered icon">27</i>
+            <div class="content">
+              Django Endless Pagination Twitter Style Ajax breaks on another Ajax call
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui unanswered icon">27</i>
+            <div class="content">
+              Distinctively visualize vertical mindshare
+            </div>
+          </a>
+          <a class="item no-underline">
+            View more &rarr;
+          </a>
+        </div>
+      </div><!-- end  /.eight wide column -->
+      <div class="eight wide column">
+        <div class="ui secondary pointing menu">
+          <div class="ui container">
+            <a class="left floated item">
+              <strong>Reputation (1,178)</strong>
+            </a>
+            <a class="ui blue color item" href="">
+              top 2% this quarter
+            </a>
+          </div>
+        </div>
+        <div class="ui list list-box-items">
+          <a class="item no-underline">
+            <i class="ui answered icon">20</i>
+            <div class="content">
+              Implementing multiple profiles with django-all-auth
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui answered icon">38</i>
+            <div class="content">
+              How to customize user profile when using django-allauth
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui unanswered icon">27</i>
+            <div class="content">
+              Django Endless Pagination Twitter Style Ajax breaks on another Ajax call
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui unanswered icon">27</i>
+            <div class="content">
+              Distinctively visualize vertical mindshare
+            </div>
+          </a>
+          <a class="item no-underline">
+            View more &rarr;
+          </a>
+        </div>
+      </div><!-- end /.eight wide column -->
+
+      <div class="eight wide column">
+        <div class="ui secondary pointing menu">
+          <div class="ui container">
+            <a class="left floated item">
+              <strong>Questions (15)</strong>
+            </a>
+            <a class="active item">
+              votes
+            </a>
+            <a class="item">
+              activity
+            </a>
+            <a class="item">
+              newest
+            </a>
+          </div>
+        </div>
+        <div class="ui list list-box-items">
+          <a class="item no-underline">
+            <i class="ui answered icon">20</i>
+            <div class="content">
+              Implementing multiple profiles with django-all-auth
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui answered icon">38</i>
+            <div class="content">
+              How to customize user profile when using django-allauth
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui unanswered icon">27</i>
+            <div class="content">
+              Django Endless Pagination Twitter Style Ajax breaks on another Ajax call
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui unanswered icon">27</i>
+            <div class="content">
+              Distinctively visualize vertical mindshare
+            </div>
+          </a>
+          <a class="item no-underline">
+            View more &rarr;
+          </a>
+        </div>
+      </div><!-- end /.eight wide column -->
+      <div class="eight wide column">
+        <div class="ui secondary pointing menu">
+          <div class="ui container">
+            <a class="item">
+              <strong>Tags (89)</strong>
+            </a>
+          </div>
+        </div>
+        <div class="ui grid">
+          <div class="eight wide column">
+            <div class="ui list list-box-items">
+              <a class="item no-underline">
+                <label class="ui basic left floated small label">46</label>
+                <label class="ui label no-radius">django</label>  × 90
+              </a>
+              <a class="item no-underline">
+                <label class="ui basic left floated small label">18</label>
+                <label class="ui label no-radius">python</label> × 47
+              </a>
+              <a class="item no-underline">
+                <label class="ui basic left floated small label">9</label>
+                <label class="ui label no-radius">django-models</label> × 13
+              </a>
+              <a class="item no-underline">
+                <label class="ui basic left floated small label">5</label>
+                <label class="ui label no-radius">html</label> × 6
+              </a>
+              <a class="item no-underline">
+                View more &rarr;
+              </a>
+            </div>
+          </div>
+          <div class="eight wide column">
+            <div class="ui list list-box-items">
+              <a class="item no-underline">
+                <label class="ui basic left floated small label">5</label>
+                <label class="ui label no-radius">django-admin</label>  × 5
+              </a>
+              <a class="item no-underline">
+                <label class="ui basic left floated small label">3</label>
+                <label class="ui label no-radius">python-3.x</label> × 5
+              </a>
+              <a class="item no-underline">
+                <label class="ui basic left floated small label">3</label>
+                <label class="ui label no-radius">authentication</label> × 3
+              </a>
+              <a class="item no-underline">
+                <label class="ui basic left floated small label">5</label>
+                <label class="ui label no-radius">templates</label> × 6
+              </a>
+            </div>
+          </div>
+        </div><!-- end /.ui grid -->
+      </div><!-- end /.eight wide column -->
+
+      <div class="eight wide column">
+        <div class="ui secondary pointing menu">
+          <div class="ui container">
+            <a class="left floated item">
+              <strong>Active bounties (0)</strong>
+            </a>
+            <a class="active item">
+              active
+            </a>
+            <a class="item">
+              offered
+            </a>
+            <a class="item">
+              earned
+            </a>
+          </div>
+        </div>
+        <div class="ui list list-box-items">
+          <a class="item no-underline">
+            <i class="ui answered icon">20</i>
+            <div class="content">
+              Implementing multiple profiles with django-all-auth
+            </div>
+          </a>
+          <a class="item no-underline">
+            <i class="ui unanswered icon">27</i>
+            <div class="content">
+              Django Endless Pagination Twitter Style Ajax breaks on another Ajax call
+            </div>
+          </a>
+          <div class="ui padded segment">
+            You have no active <a href="">bounties</a>
+          </div>
+          <a class="item no-underline">
+            View more &rarr;
+          </a>
+        </div>
+      </div><!-- end /.eight wide column -->
+      <div class="eight wide column">
+        <div class="ui secondary pointing menu">
+          <div class="ui container">
+            <a class="item">
+              <strong>Votes Cast (30)</strong>
+            </a>
+          </div>
+        </div>
+        <table class="ui table no-border">
+          <thead>
+            <tr>
+              <th colspan="2">all time</th>
+              <th colspan="2">by type</th>
+              <th>month</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>23</td>
+              <td>up</td>
+              <td>10</td>
+              <td>question</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>down</td>
+              <td>20</td>
+              <td>answer</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <a class="item no-underline">
+          View more &rarr;
+        </a>
+      </div><!-- end /.eight wide column -->
+    </div><!-- end /.grid container -->
+
+  </div><!-- end /.page.content -->
+{% endblock %}

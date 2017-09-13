@@ -1,0 +1,54 @@
+{% load staticfiles %}<!DOCTYPE html>
+<html class="no-js" lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noodp,noydir"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content='' property='fb:admins'/>
+  <meta content='' property='fb:app_id'/>
+
+  <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}">
+  <link href="/feed/" rel="alternate" type="application/rss+xml" title="Latest Feeds" />
+
+  <title>{% block title %}Django F.A.Q{% endblock %}</title>
+  <link rel="canonical" href="https://djangofaq.org{% block canonical %}{% endblock %}">
+
+  {% block robot %}{% endblock %}
+
+  {% block seo %}
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content=""/>
+  {% endblock %}
+
+  <!--<link href="{% static 'css/semantic.min.css' %}" rel="stylesheet" media="all">-->
+  <link href="{% static 'css/github/global-github-theme.min.css' %}" rel="stylesheet" media="all">
+  <link href="{% static 'css/spfjs.css' %}" rel="stylesheet" media="all">
+  <link href="{% static 'css/djangofaq.css' %}" rel="stylesheet" media="all">
+  {% block css %}{% endblock %}
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/semantic.min.js' %}"></script>
+</head>
+
+<body>
+  {% include "includes/navs.html" %}
+
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+
+  {% block footer %}
+    {% include "includes/footer.html" %}
+  {% endblock %}
+
+  <script src="{% static 'js/djangofaq.js' %}"></script>
+  <!-- begin spfjs -->
+  <div id="spfjs-progress-bar"><dt></dt><dd></dd></div>
+  <script src="{% static 'js/spfjs.min.js' %}"></script>
+  <script src="{% static 'js/spfjs-main.js' %}"></script>
+  <!-- end spfjs -->
+  {% block js %}{% endblock %}
+</body>
+</html>

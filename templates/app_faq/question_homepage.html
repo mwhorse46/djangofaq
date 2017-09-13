@@ -1,0 +1,758 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="page content">
+    <!-- Repo Header -->
+    <div class="repo ribbon">
+      <div class="ui container">
+        <div class="repo options">
+          <!--<div class="ui labeled button">
+            <div class="ui compact button">
+              <i class="question icon"></i> Questions
+            </div>
+            <a class="ui basic label">19,120</a>
+          </div>
+          <div class="ui small basic label">
+            19,120 <small>questions</small>
+          </div>-->
+          <div class="ui small primary button">
+            Ask Question
+          </div>
+          <!--<div class="ui labeled button">
+            <div class="ui compact button" data-content="Compare, review, create a pull request">
+              <i class="forked repo icon"></i> Fork
+            </div>
+            <a class="ui basic label">986</a>
+          </div>-->
+        </div>
+        <div class="ui big breadcrumb">
+          <i class="disabled question icon"></i>
+          <div class="section">All Questions</div>
+        </div>
+      </div>
+
+      <div class="ui tabular menu">
+        <div class="ui container">
+          <a class="active item">
+            <i class="rss icon"></i>
+            Newest
+          </a>
+          <a class="item">
+            <i class="star blue icon"></i>
+            Featured
+            <span class="ui small yellow label">593</span>
+          </a>
+          <a class="item">
+            <i class="graph icon"></i>
+            Frequent
+            <span class="ui small label">39</span>
+          </a>
+          <a class="item">
+            <i class="heart icon"></i>
+            Votes
+          </a>
+          <a class="item">
+            <i class="pulse icon"></i>
+            Active
+          </a>
+          <a class="item">
+            <i class="comment icon"></i>
+            Unanswered
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui equal width vertically padded grid container">
+      <div class="twelve wide column">
+        <!--<div class="repo description">
+          <div>Semantic is a UI component framework based around useful principles from natural language.</div>
+        </div>-->
+        <div class="ui divided items">
+          <div class="item">
+            <div class="stats">
+              <div class="vote stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    123
+                  </div>
+                  <div class="label">
+                    votes
+                  </div>
+                </div>
+              </div>
+              <div class="answers stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    2,204
+                  </div>
+                  <div class="label">
+                    answers
+                  </div>
+                </div>
+              </div>
+              <div class="views stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    153,242
+                  </div>
+                  <div class="label">
+                    views
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content">
+              <a href="" class="ui blue header">How do I return the response from an asynchronous call?</a>
+              <div class="meta">
+                <span class="date">asked Apr 21 '11 at 7:56 - 3 mins ago</span>
+              </div>
+              <div class="description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+              <div class="extra">
+                <a class="ui small label no-radius">Django</a>
+                <a class="ui small label no-radius">Python</a>
+                <a class="ui small label no-radius">sql-injection</a>
+
+                <div class="ui right floated user-info">
+                  <div class="ui items">
+                    <div class="item">
+                      <a class="ui tiny image">
+                        <img src="https://semantic-ui.com/images/wireframe/image.png">
+                      </a>
+                      <div class="content">
+                        <a class="ui blue small header">Stevie Feliciano</a>
+                        <div class="description">
+                          <span class="reputation">
+                            <i class="small ruby icon"></i> <b>269K</b>
+                          </span>
+                          &nbsp;
+                          <span class="gold-badge">
+                            <i class="primitive dot yellow icon"></i> 12
+                          </span>
+                          &nbsp;
+                          <span class="silver-badge">
+                            <i class="primitive dot grey icon"></i> 38
+                          </span>
+                          &nbsp;
+                          <span class="bronze-badge">
+                            <i class="primitive dot brown icon"></i> 93
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="stats">
+              <div class="vote stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    123
+                  </div>
+                  <div class="label">
+                    votes
+                  </div>
+                </div>
+              </div>
+              <div class="answers stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    2,204
+                  </div>
+                  <div class="label">
+                    answers
+                  </div>
+                </div>
+              </div>
+              <div class="views stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    153,242
+                  </div>
+                  <div class="label">
+                    views
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content">
+              <a href="" class="ui blue header">How do I return the response from an asynchronous call?</a>
+              <div class="meta">
+                <span class="date">asked Apr 21 '11 at 7:56 - 3 mins ago</span>
+              </div>
+              <div class="description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+              <div class="extra">
+                <a class="ui small label no-radius">Django</a>
+                <a class="ui small label no-radius">Python</a>
+                <a class="ui small label no-radius">sql-injection</a>
+
+                <div class="ui right floated user-info">
+                  <div class="ui items">
+                    <div class="item">
+                      <a class="ui tiny image">
+                        <img src="https://semantic-ui.com/images/wireframe/image.png">
+                      </a>
+                      <div class="content">
+                        <a class="ui blue small header">Stevie Feliciano</a>
+                        <div class="description">
+                          <span class="reputation">
+                            <i class="small ruby icon"></i> <b>269K</b>
+                          </span>
+                          &nbsp;
+                          <span class="gold-badge">
+                            <i class="primitive dot yellow icon"></i> 12
+                          </span>
+                          &nbsp;
+                          <span class="silver-badge">
+                            <i class="primitive dot grey icon"></i> 38
+                          </span>
+                          &nbsp;
+                          <span class="bronze-badge">
+                            <i class="primitive dot brown icon"></i> 93
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="stats">
+              <div class="vote stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    123
+                  </div>
+                  <div class="label">
+                    votes
+                  </div>
+                </div>
+              </div>
+              <div class="answers stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    2,204
+                  </div>
+                  <div class="label">
+                    answers
+                  </div>
+                </div>
+              </div>
+              <div class="views stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    153,242
+                  </div>
+                  <div class="label">
+                    views
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content">
+              <a href="" class="ui blue header">How do I return the response from an asynchronous call?</a>
+              <div class="meta">
+                <span class="date">asked Apr 21 '11 at 7:56 - 3 mins ago</span>
+              </div>
+              <div class="ui grey description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+              <div class="extra">
+                <a class="ui small label no-radius">Django</a>
+                <a class="ui small label no-radius">Python</a>
+                <a class="ui small label no-radius">sql-injection</a>
+
+                <div class="ui right floated user-info">
+                  <div class="ui items">
+                    <div class="item">
+                      <a class="ui tiny image">
+                        <img src="https://semantic-ui.com/images/wireframe/image.png">
+                      </a>
+                      <div class="content">
+                        <a class="ui blue small header">Stevie Feliciano</a>
+                        <div class="description">
+                          <span class="reputation">
+                            <i class="small ruby icon"></i> <b>269K</b>
+                          </span>
+                          &nbsp;
+                          <span class="gold-badge">
+                            <i class="primitive dot yellow icon"></i> 12
+                          </span>
+                          &nbsp;
+                          <span class="silver-badge">
+                            <i class="primitive dot grey icon"></i> 38
+                          </span>
+                          &nbsp;
+                          <span class="bronze-badge">
+                            <i class="primitive dot brown icon"></i> 93
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="stats">
+              <div class="vote stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    123
+                  </div>
+                  <div class="label">
+                    votes
+                  </div>
+                </div>
+              </div>
+              <div class="answers stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    2,204
+                  </div>
+                  <div class="label">
+                    answers
+                  </div>
+                </div>
+              </div>
+              <div class="views stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    153,242
+                  </div>
+                  <div class="label">
+                    views
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content">
+              <a href="" class="ui blue header">How do I return the response from an asynchronous call?</a>
+              <div class="meta">
+                <span class="date">asked Apr 21 '11 at 7:56 - 3 mins ago</span>
+              </div>
+              <div class="ui grey description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+              <div class="extra">
+                <a class="ui small label no-radius">Django</a>
+                <a class="ui small label no-radius">Python</a>
+                <a class="ui small label no-radius">sql-injection</a>
+
+                <div class="ui right floated user-info">
+                  <div class="ui items">
+                    <div class="item">
+                      <a class="ui tiny image">
+                        <img src="https://semantic-ui.com/images/wireframe/image.png">
+                      </a>
+                      <div class="content">
+                        <a class="ui blue small header">Stevie Feliciano</a>
+                        <div class="description">
+                          <span class="reputation">
+                            <i class="small ruby icon"></i> <b>269K</b>
+                          </span>
+                          &nbsp;
+                          <span class="gold-badge">
+                            <i class="primitive dot yellow icon"></i> 12
+                          </span>
+                          &nbsp;
+                          <span class="silver-badge">
+                            <i class="primitive dot grey icon"></i> 38
+                          </span>
+                          &nbsp;
+                          <span class="bronze-badge">
+                            <i class="primitive dot brown icon"></i> 93
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="stats">
+              <div class="vote stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    123
+                  </div>
+                  <div class="label">
+                    votes
+                  </div>
+                </div>
+              </div>
+              <div class="answers stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    2,204
+                  </div>
+                  <div class="label">
+                    answers
+                  </div>
+                </div>
+              </div>
+              <div class="views stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    153,242
+                  </div>
+                  <div class="label">
+                    views
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content">
+              <a href="" class="ui blue header">How do I return the response from an asynchronous call?</a>
+              <div class="meta">
+                <span class="date">asked Apr 21 '11 at 7:56 - 3 mins ago</span>
+              </div>
+              <div class="ui grey description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+              <div class="extra">
+                <a class="ui small label no-radius">Django</a>
+                <a class="ui small label no-radius">Python</a>
+                <a class="ui small label no-radius">sql-injection</a>
+
+                <div class="ui right floated user-info">
+                  <div class="ui items">
+                    <div class="item">
+                      <a class="ui tiny image">
+                        <img src="https://semantic-ui.com/images/wireframe/image.png">
+                      </a>
+                      <div class="content">
+                        <a class="ui blue small header">Stevie Feliciano</a>
+                        <div class="description">
+                          <span class="reputation">
+                            <i class="small ruby icon"></i> <b>269K</b>
+                          </span>
+                          &nbsp;
+                          <span class="gold-badge">
+                            <i class="primitive dot yellow icon"></i> 12
+                          </span>
+                          &nbsp;
+                          <span class="silver-badge">
+                            <i class="primitive dot grey icon"></i> 38
+                          </span>
+                          &nbsp;
+                          <span class="bronze-badge">
+                            <i class="primitive dot brown icon"></i> 93
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="stats">
+              <div class="vote stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    123
+                  </div>
+                  <div class="label">
+                    votes
+                  </div>
+                </div>
+              </div>
+              <div class="answers stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    2,204
+                  </div>
+                  <div class="label">
+                    answers
+                  </div>
+                </div>
+              </div>
+              <div class="views stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    153,242
+                  </div>
+                  <div class="label">
+                    views
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content">
+              <a href="" class="ui blue header">How do I return the response from an asynchronous call?</a>
+              <div class="meta">
+                <span class="date">asked Apr 21 '11 at 7:56 - 3 mins ago</span>
+              </div>
+              <div class="ui grey description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+              <div class="extra">
+                <a class="ui small label no-radius">Django</a>
+                <a class="ui small label no-radius">Python</a>
+                <a class="ui small label no-radius">sql-injection</a>
+
+                <div class="ui right floated user-info">
+                  <div class="ui items">
+                    <div class="item">
+                      <a class="ui tiny image">
+                        <img src="https://semantic-ui.com/images/wireframe/image.png">
+                      </a>
+                      <div class="content">
+                        <a class="ui blue small header">Stevie Feliciano</a>
+                        <div class="description">
+                          <span class="reputation">
+                            <i class="small ruby icon"></i> <b>269K</b>
+                          </span>
+                          &nbsp;
+                          <span class="gold-badge">
+                            <i class="primitive dot yellow icon"></i> 12
+                          </span>
+                          &nbsp;
+                          <span class="silver-badge">
+                            <i class="primitive dot grey icon"></i> 38
+                          </span>
+                          &nbsp;
+                          <span class="bronze-badge">
+                            <i class="primitive dot brown icon"></i> 93
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="stats">
+              <div class="vote stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    123
+                  </div>
+                  <div class="label">
+                    votes
+                  </div>
+                </div>
+              </div>
+              <div class="answers stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    2,204
+                  </div>
+                  <div class="label">
+                    answers
+                  </div>
+                </div>
+              </div>
+              <div class="views stats-inside">
+                <div class="ui mini statistic">
+                  <div class="value">
+                    153,242
+                  </div>
+                  <div class="label">
+                    views
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content">
+              <a href="" class="ui blue header">How do I return the response from an asynchronous call?</a>
+              <div class="meta">
+                <span class="date">asked Apr 21 '11 at 7:56 - 3 mins ago</span>
+              </div>
+              <div class="ui grey description">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+              <div class="extra">
+                <a class="ui small label no-radius">Django</a>
+                <a class="ui small label no-radius">Python</a>
+                <a class="ui small label no-radius">sql-injection</a>
+
+                <div class="ui right floated user-info">
+                  <div class="ui items">
+                    <div class="item">
+                      <a class="ui tiny image">
+                        <img src="https://semantic-ui.com/images/wireframe/image.png">
+                      </a>
+                      <div class="content">
+                        <a class="ui blue small header">Stevie Feliciano</a>
+                        <div class="description">
+                          <span class="reputation">
+                            <i class="small ruby icon"></i> <b>269K</b>
+                          </span>
+                          &nbsp;
+                          <span class="gold-badge">
+                            <i class="primitive dot yellow icon"></i> 12
+                          </span>
+                          &nbsp;
+                          <span class="silver-badge">
+                            <i class="primitive dot grey icon"></i> 38
+                          </span>
+                          &nbsp;
+                          <span class="bronze-badge">
+                            <i class="primitive dot brown icon"></i> 93
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- end /.items -->
+
+        <div class="ui divider"></div>
+
+        <div class="ui paginations">
+          <div class="ui small pagination menu">
+            <a class="active item">
+              1
+            </a>
+            <a class="item">
+              2
+            </a>
+            <a class="item">
+              3
+            </a>
+            <a class="item">
+              4
+            </a>
+            <a class="item">
+              5
+            </a>
+            <div class="disabled item">
+              ...
+            </div>
+            <a class="item">
+              2031
+            </a>
+            <a class="item">
+              next
+            </a>
+          </div><!-- end /.ui.pagination.menu -->
+          <div class="ui right floated small pagination menu">
+            <a class="active item">
+              10
+            </a>
+            <a class="item">
+              30
+            </a>
+            <a class="item">
+              50
+            </a>
+            <a class="disabled item">
+              per page
+            </a>
+          </div><!-- end /.ui.pagination.menu -->
+        </div><!-- end /.paginations -->
+      </div>
+      <div class="column right-sidebar">
+        <div class="ui fluid right vertical">
+          <div class="sidebar-total-questions">
+            <h2 class="ui grey header">
+              14,530,429
+              <div class="sub header">questions</div>
+            </h2>
+          </div><!-- end /.sidebar-total-questions -->
+
+          <!--<div class="ui divider"></div>-->
+
+          <div class="sidebar-bulletin">
+            <div class="ui list">
+              <a class="item no-underline">
+                <i class="flame icon"></i>
+                <div class="content">
+                  An excellent polish restaurant, quick delivery and hearty
+                </div>
+              </a>
+              <a class="item no-underline">
+                <i class="flame icon"></i>
+                <div class="content">
+                  A taste of Shaanxi's delicious culinary traditions
+                </div>
+              </a>
+              <a class="item no-underline">
+                <i class="flame icon"></i>
+                <div class="content">
+                  Greenpoint's best choice for quick and delicious sushi.
+                </div>
+              </a>
+            </div>
+          </div><!-- end /.sidebar-bulletin -->
+
+          <!--<div class="ui divider"></div>-->
+
+          <div class="sidebar-related-tags">
+            <h3 class="ui grey header">Related Tags</h3>
+            <div class="ui selection list"><!-- divided -->
+              <a class="item no-underline">
+                <div class="ui horizontal label no-radius">Fruit</div>
+                × 77468
+              </a>
+              <a class="item no-underline">
+                <div class="ui horizontal label no-radius">Candy</div>
+                × 16671
+              </a>
+              <a class="item no-underline">
+                <div class="ui horizontal label no-radius">Fruit</div>
+                × 9092
+              </a>
+              <a class="item no-underline">
+                <div class="ui horizontal label no-radius">Dog</div>
+                × 7066
+              </a>
+            </div>
+          </div><!-- end /.sidebar-related-tags -->
+
+          <div class="ui divider"></div>
+
+          <div class="sidebar-related-questions">
+            <div class="ui list">
+              <a class="item no-underline">
+                <i class="ui answered icon">20</i>
+                <div class="content">
+                  Implementing multiple profiles with django-all-auth
+                </div>
+              </a>
+              <a class="item no-underline">
+                <i class="ui answered icon">38</i>
+                <div class="content">
+                  How to customize user profile when using django-allauth
+                </div>
+              </a>
+              <a class="item no-underline">
+                <i class="ui unanswered icon">27</i>
+                <div class="content">
+                  Django Endless Pagination Twitter Style Ajax breaks on another Ajax call
+                </div>
+              </a>
+              <a class="item no-underline">
+                <i class="ui unanswered icon">27</i>
+                <div class="content">
+                  Distinctively visualize vertical mindshare
+                </div>
+              </a>
+            </div>
+          </div><!-- end /.sidebar-related-questions -->
+        </div><!-- end /.ui fluid right vertical -->
+      </div>
+    </div><!-- end /.ui equal width vertically padded grid container -->
+
+  </div><!-- end /.page.content -->
+{% endblock %}

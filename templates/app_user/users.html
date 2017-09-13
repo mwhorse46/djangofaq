@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="page content">
+    <!-- Repo Header -->
+    <div class="repo ribbon">
+      <div class="ui tabular menu">
+        <div class="ui container">
+          <h3 class="left floated header item" style="padding-left: 0">Users</h3>
+          <a class="item">
+            <i class="clippy icon"></i> new users
+          </a>
+          <a class="item">
+            <i class="pencil icon"></i> editors
+          </a>
+          <a class="item">
+            <i class="gist secret icon"></i> moderators
+          </a>
+          <a class="item">
+            <i class="heart icon"></i> voters
+          </a>
+          <a class="active item">
+            <i class="ruby icon"></i> reputation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui container" style="margin-bottom:2em;">
+      <div class="ui small menu">
+        <form class="item" style="margin-left:0">{% csrf_token %}
+          <div class="ui left icon input">
+            <i class="search icon"></i> &nbsp;
+            <input type="text" placeholder="Type to find users">
+          </div>
+        </form>
+
+        <div class="right menu">
+          <a class="active item">week</a>
+          <a class="item">month</a>
+          <a class="item">quarter</a>
+          <a class="item">year</a>
+          <a class="item">all</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui four cards container">
+      <div class="card">
+        <div class="content">
+          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <i class="mortar board blue icon"></i>
+          <div class="right floated meta">
+            <i class="globe green icon"></i>
+          </div>
+        </div>
+        <div class="content">
+          Cambridge, United Kingdom<br />
+          python, python-3.x, python-2.7
+        </div>
+        <div class="extra content">
+          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
+          <span class="right floated">
+            <span class="gold-badge">
+              <i class="primitive dot yellow icon"></i> 12
+            </span>
+            <span class="silver-badge">
+              <i class="primitive dot grey icon"></i> 38
+            </span>
+            <span class="bronze-badge">
+              <i class="primitive dot brown icon"></i> 93
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <i class="mortar board blue icon"></i>
+          <div class="right floated meta">
+            <i class="globe green icon"></i>
+          </div>
+        </div>
+        <div class="content">
+          Cambridge, United Kingdom<br />
+          python, python-3.x, python-2.7
+        </div>
+        <div class="extra content">
+          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
+          <span class="right floated">
+            <span class="gold-badge">
+              <i class="primitive dot yellow icon"></i> 12
+            </span>
+            <span class="silver-badge">
+              <i class="primitive dot grey icon"></i> 38
+            </span>
+            <span class="bronze-badge">
+              <i class="primitive dot brown icon"></i> 93
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <i class="mortar board blue icon"></i>
+          <div class="right floated meta">
+            <i class="globe green icon"></i>
+          </div>
+        </div>
+        <div class="content">
+          Cambridge, United Kingdom<br />
+          python, python-3.x, python-2.7
+        </div>
+        <div class="extra content">
+          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
+          <span class="right floated">
+            <span class="gold-badge">
+              <i class="primitive dot yellow icon"></i> 12
+            </span>
+            <span class="silver-badge">
+              <i class="primitive dot grey icon"></i> 38
+            </span>
+            <span class="bronze-badge">
+              <i class="primitive dot brown icon"></i> 93
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <i class="mortar board blue icon"></i>
+          <div class="right floated meta">
+            <i class="globe green icon"></i>
+          </div>
+        </div>
+        <div class="content">
+          Cambridge, United Kingdom<br />
+          python, python-3.x, python-2.7
+        </div>
+        <div class="extra content">
+          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
+          <span class="right floated">
+            <span class="gold-badge">
+              <i class="primitive dot yellow icon"></i> 12
+            </span>
+            <span class="silver-badge">
+              <i class="primitive dot grey icon"></i> 38
+            </span>
+            <span class="bronze-badge">
+              <i class="primitive dot brown icon"></i> 93
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <i class="mortar board blue icon"></i>
+          <div class="right floated meta">
+            <i class="globe green icon"></i>
+          </div>
+        </div>
+        <div class="content">
+          Cambridge, United Kingdom<br />
+          python, python-3.x, python-2.7
+        </div>
+        <div class="extra content">
+          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
+          <span class="right floated">
+            <span class="gold-badge">
+              <i class="primitive dot yellow icon"></i> 12
+            </span>
+            <span class="silver-badge">
+              <i class="primitive dot grey icon"></i> 38
+            </span>
+            <span class="bronze-badge">
+              <i class="primitive dot brown icon"></i> 93
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <i class="mortar board blue icon"></i>
+          <div class="right floated meta">
+            <i class="globe green icon"></i>
+          </div>
+        </div>
+        <div class="content">
+          Cambridge, United Kingdom<br />
+          python, python-3.x, python-2.7
+        </div>
+        <div class="extra content">
+          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
+          <span class="right floated">
+            <span class="gold-badge">
+              <i class="primitive dot yellow icon"></i> 12
+            </span>
+            <span class="silver-badge">
+              <i class="primitive dot grey icon"></i> 38
+            </span>
+            <span class="bronze-badge">
+              <i class="primitive dot brown icon"></i> 93
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <i class="mortar board blue icon"></i>
+          <div class="right floated meta">
+            <i class="globe green icon"></i>
+          </div>
+        </div>
+        <div class="content">
+          Cambridge, United Kingdom<br />
+          python, python-3.x, python-2.7
+        </div>
+        <div class="extra content">
+          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
+          <span class="right floated">
+            <span class="gold-badge">
+              <i class="primitive dot yellow icon"></i> 12
+            </span>
+            <span class="silver-badge">
+              <i class="primitive dot grey icon"></i> 38
+            </span>
+            <span class="bronze-badge">
+              <i class="primitive dot brown icon"></i> 93
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <i class="mortar board blue icon"></i>
+          <div class="right floated meta">
+            <i class="globe green icon"></i>
+          </div>
+        </div>
+        <div class="content">
+          Cambridge, United Kingdom<br />
+          python, python-3.x, python-2.7
+        </div>
+        <div class="extra content">
+          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
+          <span class="right floated">
+            <span class="gold-badge">
+              <i class="primitive dot yellow icon"></i> 12
+            </span>
+            <span class="silver-badge">
+              <i class="primitive dot grey icon"></i> 38
+            </span>
+            <span class="bronze-badge">
+              <i class="primitive dot brown icon"></i> 93
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui divider container"></div>
+
+    <div class="ui paginations container">
+      <div class="ui right floated small pagination menu">
+        <a class="active item">
+          1
+        </a>
+        <a class="item">
+          2
+        </a>
+        <a class="item">
+          3
+        </a>
+        <a class="item">
+          4
+        </a>
+        <a class="item">
+          5
+        </a>
+        <div class="disabled item">
+          ...
+        </div>
+        <a class="item">
+          2031
+        </a>
+        <a class="item">
+          next
+        </a>
+      </div><!-- end /.ui.pagination.menu -->
+    </div><!-- end /.paginations -->
+  </div><!-- end /.page.content -->
+{% endblock %}
