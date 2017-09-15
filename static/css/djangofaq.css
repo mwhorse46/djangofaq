@@ -375,6 +375,11 @@
   padding-left: 1em!important;
 }
 
+.ui.message.message-bulletin {
+  background-color: #FFF8DC;
+  border: 1px solid #E0DCBF;
+  box-shadow: none;
+}
 
 /* Sidebar */
 .sidebar-bulletin {

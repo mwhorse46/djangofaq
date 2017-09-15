@@ -6,12 +6,14 @@
   <div class="ui text container margin-2-0">
     <h3 class="ui top attached header">{% trans "Sign Out" %}</h3>
     <div class="ui attached stacked segment">
-      <div class="ui message">{% trans 'Are you sure you want to sign out?' %}</div>
+      <div class="ui message message-bulletin">{% trans 'Are you sure you want to sign out?' %}</div>
       <form method="post" action="{% url 'account_logout' %}" class="ui form">{% csrf_token %}
         {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
-        <button class="ui primary button" type="submit">{% trans 'Sign Out' %}</button>
+        <button class="ui primary button" type="submit">
+          {% trans 'Sign Out' %}
+        </button>
       </form>
     </div>
   </div>

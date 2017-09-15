@@ -12,7 +12,7 @@
     <div class="ten wide column">
       <div class="main-login-form">
         <div class="ui attached message">
-          <div class="header">Welcome to Django F.A.Q! </div>
+          <div class="header">Welcome to Django F.A.Q!</div>
           <p>
             Please sign in with one of your existing third party accounts, or use login form below:
           </p>
@@ -24,9 +24,9 @@
 
           <div class="field">
             <div class="big ui two attached buttons radius-two-buttons">
-              <a href="{% url 'github_login' %}"class="ui github button"><i class="emphasized github mark icon"></i> Github </a>
+              <a href="{% url 'github_login' %}"class="ui github button">Github</a>
               <div class="or"></div>
-              <a href="{% url 'linkedin_login' %}" class="ui linkedin button"><i class="linkedin icon"></i> LinkedIn </a>
+              <a href="{% url 'linkedin_login' %}" class="ui linkedin button">LinkedIn</a>
             </div>
           </div>
 
@@ -96,7 +96,7 @@
 
         </form>
         <div class="ui bottom attached warning message">
-          <i class="help icon circle"></i> Don't have an account? Please <a href="{{ signup_url }}" class="spf-link">signup first</a>, or <a href="{% url 'account_reset_password' %}" class="spf-link">forgot password</a>.
+          <i class="info icon circle"></i> Don't have an account? Please <a href="{{ signup_url }}" class="spf-link">signup first</a>, or <a href="{% url 'account_reset_password' %}" class="spf-link">forgot password</a>.
         </div>
       </div>
     </div>
