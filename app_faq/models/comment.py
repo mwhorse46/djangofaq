@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -42,6 +44,5 @@ class Comment(TimeStampedModel, ContentTypeToGetModel):
         return '%s' % self.get_related_object()
 
     class Meta:
-        verbose_name = _('Detail Comment')
-        verbose_name_plural = _('Comments')
+        verbose_name_plural = _('comments')
         ordering = ['-created']

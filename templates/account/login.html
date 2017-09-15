@@ -1,0 +1,109 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% block title %}{% trans "Sign In" %} :: {{ block.super }}{% endblock %}
+{% block robot %}<meta name="robots" content="noodp"/>{% endblock %}
+{% block canonical %}{% url 'account_login' %}{% endblock %}
+
+{% block content %}
+  <div class="ui grid container margin-2-0">
+    <div class="six wide column">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div class="ten wide column">
+      <div class="main-login-form">
+        <div class="ui attached message">
+          <div class="header">Welcome to Django F.A.Q! </div>
+          <p>
+            Please sign in with one of your existing third party accounts, or use login form below:
+          </p>
+        </div>
+        <form class="ui form attached fluid segment" method="post" action=".">{% csrf_token %}
+          {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+          {% endif %}
+
+          <div class="field">
+            <div class="big ui two attached buttons radius-two-buttons">
+              <a href="{% url 'github_login' %}"class="ui github button"><i class="emphasized github mark icon"></i> Github </a>
+              <div class="or"></div>
+              <a href="{% url 'linkedin_login' %}" class="ui linkedin button"><i class="linkedin icon"></i> LinkedIn </a>
+            </div>
+          </div>
+
+          <div class="ui dividing header"></div>
+
+          <div class="two fields">
+            <div class="field">
+              <label>{{ form.login.label }} *</label>
+              <div class="ui left icon input">
+                {{ form.login }}
+                <i class="person icon"></i>
+              </div>
+              {% if form.login.errors %}
+                <div class="ui pointing red basic label">
+                  {% for error in form.login.errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+            <div class="field">
+              <label>{{ form.password.label }} *</label>
+              <div class="ui left icon input">
+                {{ form.password }}
+                <i class="key icon"></i>
+              </div>
+              {% if form.password.errors %}
+                <div class="ui pointing red basic label">
+                  {% for error in form.password.errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="two fields">
+            <div class="field">
+              <label>{{ form.captcha.label }} *</label>
+              {{ form.captcha }}
+              {% if form.captcha.errors %}
+                <div class="ui pointing red basic label">
+                  {% for error in form.captcha.errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+            <div class="field">
+              <hr style="border-color:transparent"/>
+              <div class="ui segment">
+                <div class="field">
+                  <div class="ui toggle checkbox">
+                    {{ form.remember }}
+                    <label>{{ form.remember.label }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="strike"></div>
+            <button class="fluid ui primary big button" type="submit">
+              {% trans "Process Login" %}
+            </button>
+          </div>
+
+        </form>
+        <div class="ui bottom attached warning message">
+          <i class="help icon circle"></i> Don't have an account? Please <a href="{{ signup_url }}" class="spf-link">signup first</a>, or <a href="{% url 'account_reset_password' %}" class="spf-link">forgot password</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block js %}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}

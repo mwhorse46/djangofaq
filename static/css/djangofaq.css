@@ -25,6 +25,9 @@
 .hover-opacity:hover {
   opacity: 1;
 }
+.margin-2-0 {
+  margin: 2em 0!important;
+}
 .ui.blue.header {
   color: #4183C4!important;
   text-decoration: none;
@@ -444,4 +447,14 @@
 }
 .user-info-signature {
   margin: 0!important;
+}
+
+.ui.attached.buttons.radius-two-buttons .or {
+  position: static;
+}
+.ui.attached.buttons.radius-two-buttons .ui.github.button {
+  border-radius: 2px 0 0 2px;
+}
+.ui.attached.buttons.radius-two-buttons .ui.linkedin.button {
+  border-radius: 0 2px 2px 0;
 }

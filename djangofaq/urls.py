@@ -13,12 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf import settings
 from django.contrib import admin
+from django.conf.urls import include, url
+from django.conf.urls.static import static
+from django.views.i18n import JavaScriptCatalog
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^badges/', include('badges.urls')),
+
+    # internationalization
+    url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+
+    # 3d party apps
+    url(r'^accounts/', include('allauth.urls')),
+
+    # major apps
     url(r'^', include('app_faq.urls')),
     url(r'^', include('app_user.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

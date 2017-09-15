@@ -30,12 +30,12 @@ class Tag(TimeStampedModel):
         _('Edited?'), default=False)
 
     editor = models.ForeignKey(
-        User, related_name='tag_editor')
+        User, blank=True, null=True,
+        on_delete=models.SET_NULL, related_name='tag_editor')
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = _('Detail Tag')
-        verbose_name_plural = _('Tags')
+        verbose_name_plural = _('tags')
         ordering = ['-created']

@@ -27,6 +27,5 @@ class Help(TimeStampedModel):
         return self.title
 
     class Meta:
-        verbose_name = _('Detail Help')
-        verbose_name_plural = _('Helps')
+        verbose_name_plural = _('helps')
         ordering = ['-created']

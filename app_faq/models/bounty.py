@@ -28,6 +28,7 @@ class Bounty(models.Model):
         _('is active bounty?'), default=True)
 
     start_date = models.DateTimeField(auto_now_add=True)
+
     end_date = models.DateTimeField()
 
     def save(self, *args, **kwargs):
@@ -47,8 +48,7 @@ class Bounty(models.Model):
             'user': self.user, 'question': self.question, 'price': self.price}
 
     class Meta:
-        verbose_name = _('Detail Bounty')
-        verbose_name_plural = _('Bounties')
+        verbose_name_plural = _('bounties')
         ordering = ['-start_date']
 
 
@@ -69,6 +69,5 @@ class BountyAward(TimeStampedModel):
             'receiver': self.answer.author, 'price': self.price, 'sender': self.bounty.user}
 
     class Meta:
-        verbose_name = _('Detail Bounty Award')
-        verbose_name_plural = _('Bounty Awards')
+        verbose_name_plural = _('bounty awards')
         ordering = ['-created']

@@ -1,0 +1,12 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Account Inactive" %} :: {{ block.super }}{% endblock %}
+
+{% block content %}
+  <div class="ui text container margin-2-0">
+    <h3 class="ui top attached header">{% trans "Account Inactive" %}</h3>
+    <div class="ui attached stacked segment">
+      {% trans "This account is inactive." %}
+    </div>
+  </div>
+{% endblock %}

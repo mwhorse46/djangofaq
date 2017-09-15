@@ -53,6 +53,5 @@ class Question(TimeStampedModel):
         return self.title
 
     class Meta:
-        verbose_name = _('Detail Question')
-        verbose_name_plural = _('Questions')
+        verbose_name_plural = _('questions')
         ordering = ['-created']

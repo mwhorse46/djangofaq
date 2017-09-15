@@ -43,9 +43,9 @@ class Answer(TimeStampedModel):
         on_delete=models.SET_NULL, related_name='answer_editor')
 
     def __str__(self):
-        return self.title
+        _title = _('%(author)s comment on %(question)s')
+        return _title % {'author': self.author, 'question': self.question}
 
     class Meta:
-        verbose_name = _('Detail Question')
-        verbose_name_plural = _('Questions')
+        verbose_name_plural = _('answers')
         ordering = ['-created']

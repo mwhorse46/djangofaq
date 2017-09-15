@@ -6,3 +6,4 @@ from django.apps import AppConfig
 
 class AppFaqConfig(AppConfig):
     name = 'app_faq'
+    verbose_name = 'F.A.Q'

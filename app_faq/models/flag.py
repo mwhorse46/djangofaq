@@ -43,6 +43,5 @@ class Flag(TimeStampedModel, ContentTypeToGetModel):
                         'model': self._model_name, 'id': self.object_id}
 
     class Meta:
-        verbose_name = _('Detail Flag')
-        verbose_name_plural = _('Flags')
+        verbose_name_plural = _('flags')
         ordering = ['-created']
