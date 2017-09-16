@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo -n "\n[+] commit ➜ ";
+echo '';
+echo -n "[+] commit ➜ ";
 read commit
 
 if [ "$commit" ]; then
