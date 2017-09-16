@@ -1,12 +1,17 @@
 #!/bin/bash
 
-if [ "$1" != "" ]; then
-  git add .;
-  git commit -m "$@";
+echo -n "commit ➜ ";
+read commit
 
-  # bitbucket
-  git push -u origin master;
+if [ "$commit" ]; then
+    git add .;
+    git commit -m "$commit";
 
-  # github
-  git push -u github master;
+    echo "$commit";
+
+    # bitbucket
+    #git push -u origin master;
+
+    # github
+    #git push -u github master;
 fi
