@@ -3,9 +3,9 @@
 Homepage
 ----------
 
-![home](__ext/1. home.png)
+![home](__ext/1.%20home.png)
 
 Detail
 ----------
 
-![detail](__ext/2. detail.png)
+![detail](__ext/2.%20detail.png)
