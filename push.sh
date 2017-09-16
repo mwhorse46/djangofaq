@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -n "commit ➜ ";
+echo -n "\n[+] commit ➜ ";
 read commit
 
 if [ "$commit" ]; then
@@ -10,8 +10,8 @@ if [ "$commit" ]; then
     echo "$commit";
 
     # bitbucket
-    #git push -u origin master;
+    git push -u origin master;
 
     # github
-    #git push -u github master;
+    git push -u github master;
 fi
