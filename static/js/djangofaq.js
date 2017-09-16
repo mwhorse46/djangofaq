@@ -1,8 +1,4 @@
 $(document).ready(function() {
-  //$('.ui.dropdown').dropdown();
-});
-
-$(document).ready(function() {
     var
       $userDropdown = $('.user.dropdown'),
       $addDropdown  = $('.add.dropdown'),

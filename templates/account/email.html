@@ -36,9 +36,15 @@
           </div>
 
           <div class="ui secondary segment buttonHolder">
-            <button class="ui blue button secondaryAction" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
-            <button class="ui yellow button secondaryAction" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
-            <button class="ui red button primaryAction" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+            <button class="ui blue button secondaryAction" type="submit" name="action_primary" >
+              <i class="check icon"></i> {% trans 'Make Primary' %}
+            </button>
+            <button class="ui yellow button secondaryAction" type="submit" name="action_send" >
+              <i class="rocket icon"></i> {% trans 'Re-send Verification' %}
+            </button>
+            <button class="ui red button primaryAction" type="submit" name="action_remove" >
+              <i class="x icon"></i> {% trans 'Remove' %}
+            </button>
           </div>
         </div>
       </form>
@@ -67,7 +73,9 @@
             {% endif %}
           </div>
           <div class="field">
-            <button class="ui primary button" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
+            <button class="ui primary button" name="action_add" type="submit">
+              <i class="plus icon"></i> {% trans "Add E-mail" %}
+            </button>
           </div>
         </div>
       </div>

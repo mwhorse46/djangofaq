@@ -1,14 +1,15 @@
 {% extends "base.html" %}
-{% block title %}Detail :: {{ block.super }}{% endblock %}
+{% load i18n %}
+{% load common_tags %}
+{% block title %}{{ question.title }} :: {{ block.super }}{% endblock %}
 
 {% block content %}
   <div class="page content">
-    <!-- Repo Header -->
     <div class="repo ribbon ribbon-detail">
       <div class="ui container">
         <div class="ui massive breadcrumb breadcrumb-title-detail">
           <!--<i class="disabled repo icon"></i>-->
-          <a class="ui grey section no-underline">How can i add a onchange js event to Select widget in Django?</a>
+          <a href="{% url 'question_detail' pk=question.pk slug=question.slug %}" class="ui grey section no-underline spf-link">{{ question.title }}</a>
         </div>
         <div class="repo options">
           <div class="ui small primary button">
@@ -45,21 +46,13 @@
             </div>
             <div class="content">
               <div class="description content-description-detail">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {{ question.description }}
               </div>
               <div class="extra">
                 <div class="tags-question-detail">
-                  <a class="ui small label no-radius">Django</a>
-                  <a class="ui small label no-radius">Python</a>
-                  <a class="ui small label no-radius">sql-injection</a>
-                  <a class="ui small label no-radius">JavaScript</a>
-                  <a class="ui small label no-radius">ajax</a>
-                  <a class="ui small label no-radius">jQuery</a>
+                  {% for tag in question.tags.all %}
+                    <a href="" class="ui small label no-radius">{{ tag.title }}</a>
+                  {% endfor %}
                 </div>
 
                 <table class="ui table no-border table-question-footer">
@@ -70,54 +63,62 @@
                         <span class="ui link grey color edit-action">edit</span>
                         <span class="ui link grey color flag-action">flag</span>
                       </td>
-                      <td class="no-border user-info user-signature">
-                        <div class="ui comments">
-                          <a class="ui link no-underline user-action-time">edited Jun 28 '16 at 6:01</a>
-                          <div class="comment user-info-signature">
-                            <a class="avatar">
-                              <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
+
+                      {% if question.editor %}
+                        <td class="no-border user-info user-signature">
+                          <div class="ui comments">
+                            <a class="ui link no-underline user-action-time" title="{{ question.modified }}">
+                              {% blocktrans with time=question.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
                             </a>
-                            <div class="content">
-                              <a class="author">Tom Lukic</a>
-                              <div class="text">
-                                <span class="reputation">
-                                  <i class="small ruby icon"></i> <b>269K</b>
-                                </span>
-                                <span class="gold-badge">
-                                  <i class="primitive dot yellow icon"></i> 12
-                                </span>
-                                <span class="silver-badge">
-                                  <i class="primitive dot grey icon"></i> 38
-                                </span>
-                                <span class="bronze-badge">
-                                  <i class="primitive dot brown icon"></i> 93
-                                </span>
+                            <div class="comment user-info-signature">
+                              <a class="avatar">
+                                <img src="{{ question.editor.email|gravatar:'75' }}">
+                              </a>
+                              <div class="content">
+                                <a class="author">{{ question.editor }}</a>
+                                <div class="text">
+                                  <span class="reputation">
+                                    <i class="small ruby orange icon"></i> <b>269K</b>
+                                  </span>
+                                  <span class="gold-badge">
+                                    <i class="primitive dot yellow icon icon-dot-badge"></i> 12
+                                  </span>
+                                  <span class="silver-badge">
+                                    <i class="primitive dot grey icon icon-dot-badge"></i> 38
+                                  </span>
+                                  <span class="bronze-badge">
+                                    <i class="primitive dot brown icon icon-dot-badge"></i> 93
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
+                        </td>
+                      {% endif %}
+
                       <td class="no-border user-info user-signature">
                         <div class="ui comments">
-                          <span class="ui grey color user-action-time">asked Nov 18 '08 at 13:52</span>
+                          <span class="ui grey color user-action-time" title="{{ question.created }}">
+                            {% blocktrans with time=question.created|timesince %}asked {{ time }} ago{% endblocktrans %}
+                          </span>
                           <div class="comment user-info-signature">
                             <a class="avatar">
-                              <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
+                              <img src="{{ question.author.email|gravatar:'75' }}">
                             </a>
                             <div class="content">
-                              <a class="author">Tom Lukic</a>
+                              <a class="author">{{ question.author }}</a>
                               <div class="text">
                                 <span class="reputation">
-                                  <i class="small ruby icon"></i> <b>269K</b>
+                                  <i class="small ruby orange icon"></i> <b>269K</b>
                                 </span>
                                 <span class="gold-badge">
-                                  <i class="primitive dot yellow icon"></i> 12
+                                  <i class="primitive dot yellow icon icon-dot-badge"></i> 12
                                 </span>
                                 <span class="silver-badge">
-                                  <i class="primitive dot grey icon"></i> 38
+                                  <i class="primitive dot grey icon icon-dot-badge"></i> 38
                                 </span>
                                 <span class="bronze-badge">
-                                  <i class="primitive dot brown icon"></i> 93
+                                  <i class="primitive dot brown icon icon-dot-badge"></i> 93
                                 </span>
                               </div>
                             </div>
@@ -169,147 +170,153 @@
             </div>
           </div><!-- end /.item-question -->
 
-          <div class="ui tabular menu">
-            <div class="ui container">
-              <h3 class="left floated header item">
-                1 Answer
-              </h3>
-              <a class="active item">
-                <i class="pulse icon"></i> active
-              </a>
-              <a class="item">
-                <i class="history icon"></i> oldest
-              </a>
-              <a class="item">
-                <i class="heart icon"></i> votes
-              </a>
-            </div>
-          </div>
-          <div class="item item-answers no-border">
-            <div class="stats">
-              <div class="vote-up stats-inside-detail">
-                <i class="triangle up massive link orange icon"></i>
+          {% if question.answer_question.approved %}
+            <div class="ui tabular menu">
+              <div class="ui container">
+                <h3 class="left floated header item">
+                  {{ question.answer_question.approved.count }} {% trans "Answer" %}
+                </h3>
+                <a class="active item">
+                  <i class="pulse icon"></i> {% trans "active" %}
+                </a>
+                <a class="item">
+                  <i class="history icon"></i> {% trans "oldest" %}
+                </a>
+                <a class="item">
+                  <i class="heart icon"></i> {% trans "votes" %}
+                </a>
               </div>
-              <div class="vote-total stats-inside-detail">
-                <div class="value">
-                  304
+            </div>
+          {% endif %}{# question.answer_question.approved #}
+
+          {% for answer in question.answer_question.approved %}
+            <div class="item item-answers no-border">
+              <div class="stats">
+                <div class="vote-up stats-inside-detail">
+                  <i class="triangle up massive link orange icon"></i>
+                </div>
+                <div class="vote-total stats-inside-detail">
+                  <div class="value">
+                    304
+                  </div>
+                </div>
+                <div class="vote-down stats-inside-detail">
+                  <i class="triangle down massive link grey icon"></i>
+                </div>
+                <div class="favorite-icon stats-inside-detail">
+                  <i class="check big link green icon"></i>
                 </div>
               </div>
-              <div class="vote-down stats-inside-detail">
-                <i class="triangle down massive link grey icon"></i>
-              </div>
-              <div class="favorite-icon stats-inside-detail">
-                <i class="check big link green icon"></i>
-              </div>
-            </div>
-            <div class="content">
-              <div class="description content-description-detail">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </div>
-              <div class="extra">
-                <table class="ui table no-border table-answer-footer">
-                  <tbody>
-                    <tr>
-                      <td class="ui grey color no-border sef-actions">
-                        <span class="ui link grey color share-action">share</span>
-                        <span class="ui link grey color edit-action">edit</span>
-                        <span class="ui link grey color flag-action">flag</span>
-                      </td>
-                      <td class="no-border user-info user-signature">
-                        <div class="ui comments">
-                          <a class="ui link no-underline user-action-time">edited Jun 28 '16 at 6:01</a>
-                          <div class="comment user-info-signature">
-                            <a class="avatar">
-                              <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
-                            </a>
-                            <div class="content">
-                              <a class="author">Tom Lukic</a>
-                              <div class="text">
-                                <span class="reputation">
-                                  <i class="small ruby icon"></i> <b>269K</b>
-                                </span>
-                                <span class="gold-badge">
-                                  <i class="primitive dot yellow icon"></i> 12
-                                </span>
-                                <span class="silver-badge">
-                                  <i class="primitive dot grey icon"></i> 38
-                                </span>
-                                <span class="bronze-badge">
-                                  <i class="primitive dot brown icon"></i> 93
-                                </span>
+              <div class="content">
+                <div class="description content-description-detail">
+                  {{ answer.description }}
+                </div>
+                <div class="extra">
+                  <table class="ui table no-border table-answer-footer">
+                    <tbody>
+                      <tr>
+                        <td class="ui grey color no-border sef-actions">
+                          <span class="ui link grey color share-action">{% trans "share" %}</span>
+                          <span class="ui link grey color edit-action">{% trans "edit" %}</span>
+                          <span class="ui link grey color flag-action">{% trans "flag" %}</span>
+                        </td>
+                        {% if answer.editor %}
+                          <td class="no-border user-info user-signature">
+                            <div class="ui comments">
+                              <a class="ui link no-underline user-action-time" title="{{ answer.modified }}">
+                                {% blocktrans with time=answer.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
+                              </a>
+                              <div class="comment user-info-signature">
+                                <a class="avatar">
+                                  <img src="{{ question.editor.email|gravatar:'75' }}">
+                                </a>
+                                <div class="content">
+                                  <a class="author">{{ answer.editor }}</a>
+                                  <div class="text">
+                                    <span class="reputation">
+                                      <i class="small ruby orange icon"></i> <b>269K</b>
+                                    </span>
+                                    <span class="gold-badge">
+                                      <i class="primitive dot yellow icon icon-dot-badge"></i> 12
+                                    </span>
+                                    <span class="silver-badge">
+                                      <i class="primitive dot grey icon icon-dot-badge"></i> 38
+                                    </span>
+                                    <span class="bronze-badge">
+                                      <i class="primitive dot brown icon icon-dot-badge"></i> 93
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        {% endif %}{# answer.editor #}
+                        <td class="no-border user-info user-signature">
+                          <div class="ui comments">
+                            <span class="ui grey color user-action-time" title="{{ answer.created }}">
+                              {% blocktrans with time=answer.created|timesince %}answered {{ time }} ago{% endblocktrans %}
+                            </span>
+                            <div class="comment user-info-signature">
+                              <a class="avatar">
+                                <img src="{{ answer.author.email|gravatar:'75' }}">
+                              </a>
+                              <div class="content">
+                                <a class="author">{{ answer.author }}</a>
+                                <div class="text">
+                                  <span class="reputation">
+                                    <i class="small ruby orange icon"></i> <b>269K</b>
+                                  </span>
+                                  <span class="gold-badge">
+                                    <i class="primitive dot yellow icon icon-dot-badge"></i> 12
+                                  </span>
+                                  <span class="silver-badge">
+                                    <i class="primitive dot grey icon icon-dot-badge"></i> 38
+                                  </span>
+                                  <span class="bronze-badge">
+                                    <i class="primitive dot brown icon icon-dot-badge"></i> 93
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td class="no-border user-info user-signature">
-                        <div class="ui comments">
-                          <span class="ui grey color user-action-time">asked Nov 18 '08 at 13:52</span>
-                          <div class="comment user-info-signature">
-                            <a class="avatar">
-                              <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
-                            </a>
-                            <div class="content">
-                              <a class="author">Tom Lukic</a>
-                              <div class="text">
-                                <span class="reputation">
-                                  <i class="small ruby icon"></i> <b>269K</b>
-                                </span>
-                                <span class="gold-badge">
-                                  <i class="primitive dot yellow icon"></i> 12
-                                </span>
-                                <span class="silver-badge">
-                                  <i class="primitive dot grey icon"></i> 38
-                                </span>
-                                <span class="bronze-badge">
-                                  <i class="primitive dot brown icon"></i> 93
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="ui divider"></div>
-                <table class="ui table no-border table-answer-comments">
-                  <tbody>
-                    <tr>
-                      <td class="ui grey color">
-                        18
-                      </td>
-                      <td>
-                        <i class="triangle up grey link icon hover-opacity"></i><br />
-                        <i class="milestone grey link icon hover-opacity"></i>
-                      </td>
-                      <td>If you are using heroku Toobelt then this is a nice choice. :) Thanks for the share. &ndash; <a>mikeDOTexe</a> <date class="ui grey color">Feb 6 '16 at 3:15</date> <i class="ui pencil small grey icon"></i></td>
-                    </tr>
-                    <tr>
-                      <td class="ui grey color">
-                        7
-                      </td>
-                      <td>
-                        <i class="triangle up grey link icon hover-opacity"></i><br />
-                        <i class="milestone grey link icon hover-opacity"></i>
-                      </td>
-                      <td>If you are using heroku Toobelt then this is a nice choice. :) Thanks for the share. &ndash; <a>mikeDOTexe</a> <date class="ui grey color">Feb 6 '16 at 3:15</date></td>
-                    </tr>
-                    <tr>
-                      <td colspan="3" style="padding:10px;">
-                        <span class="ui blue color link">add a comment</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="ui divider"></div>
+                  <table class="ui table no-border table-answer-comments">
+                    <tbody>
+                      <tr>
+                        <td class="ui grey color">
+                          18
+                        </td>
+                        <td>
+                          <i class="triangle up grey link icon hover-opacity"></i><br />
+                          <i class="milestone grey link icon hover-opacity"></i>
+                        </td>
+                        <td>If you are using heroku Toobelt then this is a nice choice. :) Thanks for the share. &ndash; <a>mikeDOTexe</a> <date class="ui grey color">Feb 6 '16 at 3:15</date> <i class="ui pencil small grey icon"></i></td>
+                      </tr>
+                      <tr>
+                        <td class="ui grey color">
+                          7
+                        </td>
+                        <td>
+                          <i class="triangle up grey link icon hover-opacity"></i><br />
+                          <i class="milestone grey link icon hover-opacity"></i>
+                        </td>
+                        <td>If you are using heroku Toobelt then this is a nice choice. :) Thanks for the share. &ndash; <a>mikeDOTexe</a> <date class="ui grey color">Feb 6 '16 at 3:15</date></td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" style="padding:10px;">
+                          <span class="ui blue color link">add a comment</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
-          </div><!-- end /.item-answers -->
+            </div><!-- end /.item-answers -->
+          {% endfor %}{# question.answer_question.approved #}
         </div><!-- end /.items -->
 
         <div class="ui divider"></div>
@@ -343,16 +350,18 @@
             <table class="ui table no-border">
               <tbody>
                 <tr>
-                  <td class="ui grey color no-border">asked</td>
-                  <td class="no-border">7 months ago</td>
+                  <td class="ui grey color no-border">{% trans "asked" %}</td>
+                  <td class="no-border" title="{{ question.created }}">{{ question.created|timesince }} {% trans "ago" %}</td>
                 </tr>
                 <tr>
-                  <td class="ui grey color no-border">viewed</td>
+                  <td class="ui grey color no-border">{% trans "viewed" %}</td>
                   <td class="no-border">1,164 times</td>
                 </tr>
                 <tr>
-                  <td class="ui grey color no-border">active</td>
-                  <td class="no-border"><span class="ui link blue color no-border">7 months ago</a></span>
+                  <td class="ui grey color no-border">{% trans "active" %}</td>
+                  <td class="no-border">
+                    <a href="" class="ui link blue color no-border spf-link" title="{{ question.created }}">{{ question.modified|timesince }} {% trans "ago" %}</a>
+                  </span>
                 </tr>
               </tbody>
             </table>

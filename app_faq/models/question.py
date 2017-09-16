@@ -12,6 +12,36 @@ from app_faq.models.tag import Tag
 from app_faq.models.time import TimeStampedModel
 
 
+class QuestionQuerySet(models.QuerySet):
+
+    def published(self):
+        return self.exclude(status='deleted')
+
+    def approved(self):
+        return self.filter(status='approved')
+
+    def duplicated(self):
+        return self.filter(status='duplicated')
+
+    def pending(self):
+        return self.filter(status='pending')
+
+    def on_hold(self):
+        return self.filter(status='on_hold')
+
+    def closed(self):
+        return self.filter(status='closed')
+
+    def deleted(self):
+        return self.filter(status='deleted')
+
+    def edited(self):
+        return self.filter(edited=True)
+
+    def unedited(self):
+        return self.filter(edited=False)
+
+
 @python_2_unicode_compatible
 class Question(TimeStampedModel):
     author = models.ForeignKey(
@@ -48,6 +78,8 @@ class Question(TimeStampedModel):
     editor = models.ForeignKey(
         User, blank=True, null=True,
         on_delete=models.SET_NULL, related_name='question_editor')
+
+    objects = QuestionQuerySet.as_manager()
 
     def __str__(self):
         return self.title

@@ -1,15 +1,19 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load counter %}
+{% block title %}Tags :: {{ block.super }}{% endblock %}
 
 {% block content %}
   <div class="page content">
-    <!-- Repo Header -->
     <div class="repo ribbon">
       <div class="ui tabular menu">
         <div class="ui container">
-          <h3 class="left floated header item" style="padding-left: 0;">Tags &dash;&nbsp; <small>A tag is a keyword or label that categorizes your question with other, similar questions.</small></h3>
+          <h3 class="left floated header item" style="padding-left: 0;">
+            Tags &dash;&nbsp; <small>A tag is a keyword or label that categorizes your question with other, similar questions.</small>
+          </h3>
           <form class="item">{% csrf_token %}
             <div class="ui small input">
-              <input type="text" placeholder="Type to find tags">
+              <input type="text" name="find-tags" placeholder="{% trans 'Type to find tags' %}">
             </div>
           </form>
           <a class="active item">
@@ -25,52 +29,22 @@
       </div>
     </div>
 
-    <div class="ui grid container">
-      <div class="four wide column tag-column">
-        <p><a class="ui small label no-radius">javascript</a> × 1466482</p>
-        <p class="ui grey color">JavaScript (not to be confused with Java) is a high-level, dynamic, multi-paradigm, weakly-typed language used for both client-side and server-side scripting.</p>
-        <p><small class="ui link">532 asked today, 5548 this week</small></p>
-      </div>
-      <div class="four wide column tag-column">
-        <p><a class="ui small label no-radius">java</a> × 1309178</p>
-        <p class="ui grey color">Java (not to be confused with JavaScript or JScript) is a general-purpose object-oriented programming language designed to be used in conjunction with the Java Virtual Machine</p>
-        <p><small class="ui link">412 asked today, 3902 this week</small></p>
-      </div>
-      <div class="four wide column tag-column">
-        <p><a class="ui small label no-radius">python</a> × 813792</p>
-        <p class="ui grey color">a dynamic and strongly typed programming language designed to emphasize usability. Two similar but mostly incompatible versions of Python are in widespread use (2 and 3).</p>
-        <p><small class="ui link">462 asked today, 4487 this week</small></p>
-      </div>
-      <div class="four wide column">
-        <p><a class="ui small label no-radius">php</a> × 1118634</p>
-        <p class="ui grey color">a widely used, high-level, dynamic, object-oriented and interpreted scripting language primarily designed for server-side web development.</p>
-        <p><small class="ui link">352 asked today, 3314 this week</small></p>
-      </div>
-      <div class="four wide column">
-        <p><a class="ui small label no-radius">php</a> × 1118634</p>
-        <p class="ui grey color">a widely used, high-level, dynamic, object-oriented and interpreted scripting language primarily designed for server-side web development.</p>
-        <p><small class="ui link">352 asked today, 3314 this week</small></p>
-      </div>
-      <div class="four wide column">
-        <p><a class="ui small label no-radius">php</a> × 1118634</p>
-        <p class="ui grey color">a widely used, high-level, dynamic, object-oriented and interpreted scripting language primarily designed for server-side web development.</p>
-        <p><small class="ui link">352 asked today, 3314 this week</small></p>
-      </div>
-      <div class="four wide column">
-        <p><a class="ui small label no-radius">php</a> × 1118634</p>
-        <p class="ui grey color">a widely used, high-level, dynamic, object-oriented and interpreted scripting language primarily designed for server-side web development.</p>
-        <p><small class="ui link">352 asked today, 3314 this week</small></p>
-      </div>
-      <div class="four wide column">
-        <p><a class="ui small label no-radius">php</a> × 1118634</p>
-        <p class="ui grey color">a widely used, high-level, dynamic, object-oriented and interpreted scripting language primarily designed for server-side web development.</p>
-        <p><small class="ui link">352 asked today, 3314 this week</small></p>
-      </div>
-    </div><!-- end /.ui.grid.container -->
+    <div class="ui grid container container-default-tags-items">
+      {% for tag in tags %}
+        <div class="four wide column tag-column">
+          <p><a class="ui small label no-radius">{{ tag.title }}</a> × {{ tag|get_total_questions_tagged }}</p>
+          <p class="ui grey color">{{ tag.short_description|safe|striptags|truncatewords:"12" }}</p>
+          <p><small class="ui link">532 asked today, 5548 this week</small></p>
+        </div>
+      {% endfor %}
+    </div><!-- end /.ui.grid.container.container-default-tags-items -->
 
-    <div class="ui divider container"></div>
+    <div class="ui grid container container-offset-tags-items">
+    </div><!-- end /.ui.grid.container.container-offset-tags-items -->
 
-    <div class="ui paginations container">
+    <div class="ui paginations container tags-pagination">
+      <div class="ui divider"></div>
+
       <div class="ui right floated small pagination menu">
         <a class="active item">
           1
@@ -99,4 +73,28 @@
       </div><!-- end /.ui.pagination.menu -->
     </div><!-- end /.paginations -->
   </div><!-- end /.page.content -->
+{% endblock %}
+
+{% block js %}
+  <script>
+    var inp = $('input[name="find-tags"]');
+    inp.keyup(function(){
+      var query = this.value;
+      if(query.length >= 1){
+        $.ajax({
+          type: 'GET',
+          url: '{% url "tags_search_offset" %}?q='+query,
+          success: function(response) {
+            $('.tags-pagination').hide();
+            $('.container-default-tags-items').hide();
+            $('.container-offset-tags-items').html(response);
+          }
+        });
+      }else {
+        $('.tags-pagination').show();
+        $('.container-default-tags-items').show();
+        $('.container-offset-tags-items').html();
+      }
+    });
+  </script>
 {% endblock %}

@@ -25,6 +25,12 @@
 .hover-opacity:hover {
   opacity: 1;
 }
+.icon.icon-dot-badge {
+  margin-right: -3px!important;
+}
+.breadcrumb-title-detail>a {
+  max-width: 900px;
+}
 .margin-2-0 {
   margin: 2em 0!important;
 }

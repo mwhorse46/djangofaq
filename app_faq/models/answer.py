@@ -11,6 +11,27 @@ from app_faq.models.question import Question
 from app_faq.models.time import TimeStampedModel
 
 
+class AnswerQuerySet(models.QuerySet):
+
+    def approved(self):
+        return self.filter(status='approved')
+
+    def duplicated(self):
+        return self.filter(status='duplicated')
+
+    def pending(self):
+        return self.filter(status='pending')
+
+    def on_hold(self):
+        return self.filter(status='on_hold')
+
+    def closed(self):
+        return self.filter(status='closed')
+
+    def deleted(self):
+        return self.filter(status='deleted')
+
+
 @python_2_unicode_compatible
 class Answer(TimeStampedModel):
     author = models.ForeignKey(
@@ -41,6 +62,8 @@ class Answer(TimeStampedModel):
     editor = models.ForeignKey(
         User, blank=True, null=True,
         on_delete=models.SET_NULL, related_name='answer_editor')
+
+    objects = AnswerQuerySet.as_manager()
 
     def __str__(self):
         _title = _('%(author)s comment on %(question)s')

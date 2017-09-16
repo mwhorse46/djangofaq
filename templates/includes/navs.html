@@ -3,19 +3,19 @@
     <div class="ui right floated icon text menu">
       <div class="item">
         <span class="reputation">
-          <i class="ruby small icon"></i> <b>269K</b>
+          <i class="ruby small orange icon"></i> <b>269K</b>
         </span>
         &nbsp;
         <span class="gold-badge">
-          <i class="primitive dot yellow icon"></i> 12
+          <i class="primitive dot yellow icon icon-dot-badge"></i> 12
         </span>
         &nbsp;
         <span class="silver-badge">
-          <i class="primitive dot grey icon"></i> 38
+          <i class="primitive dot grey icon icon-dot-badge"></i> 38
         </span>
         &nbsp;
         <span class="bronze-badge">
-          <i class="primitive dot brown icon"></i> 93
+          <i class="primitive dot brown icon icon-dot-badge"></i> 93
         </span>
       </div>
 
@@ -64,7 +64,7 @@
     </div>
 
     <div class="ui text menu">
-      <a class="icon item" href="http://www.github.com/semantic-org/semantic-ui/">
+      <a class="icon item spf-link" href="{% url 'question_homepage' %}">
         <i class="huge emphasized github mark icon"></i>
       </a>
       <div class="item">
@@ -74,13 +74,13 @@
           </div>
           <input type="text" placeholder="Search">
         </div>
-        <a class="item">
+        <a class="item spf-link" href="{% url 'question_homepage' %}">
           <b>Questions</b>
         </a>
-        <a class="item">
+        <a class="item spf-link" href="{% url 'tags' %}">
           <b>Tags</b>
         </a>
-        <a class="item">
+        <a class="item spf-link" href="{% url 'users' %}">
           <b>Users</b>
         </a>
       </div>
