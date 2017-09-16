@@ -12,5 +12,5 @@ if [ "$commit" ]; then
     git push -u origin master;
 
     # github
-    git push -u github master;
+    # git push -u github master;
 fi

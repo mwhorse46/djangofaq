@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load common_tags %}
+{% block title %}{% trans "Users" %} :: {{ block.super }}{% endblock %}
 
 {% block content %}
   <div class="page content">
-    <!-- Repo Header -->
     <div class="repo ribbon">
       <div class="ui tabular menu">
         <div class="ui container">
@@ -46,9 +48,10 @@
     </div>
 
     <div class="ui four cards container">
+      {% for user in users %}
       <div class="card">
         <div class="content">
-          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
+          <img class="ui avatar image" src="{{ user.email|gravatar:'75' }}"> {{ user }}
           <i class="mortar board blue icon"></i>
           <div class="right floated meta">
             <i class="globe green icon"></i>
@@ -73,195 +76,7 @@
           </span>
         </div>
       </div>
-      <div class="card">
-        <div class="content">
-          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
-          <i class="mortar board blue icon"></i>
-          <div class="right floated meta">
-            <i class="globe green icon"></i>
-          </div>
-        </div>
-        <div class="content">
-          Cambridge, United Kingdom<br />
-          python, python-3.x, python-2.7
-        </div>
-        <div class="extra content">
-          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
-          <span class="right floated">
-            <span class="gold-badge">
-              <i class="primitive dot yellow icon"></i> 12
-            </span>
-            <span class="silver-badge">
-              <i class="primitive dot grey icon"></i> 38
-            </span>
-            <span class="bronze-badge">
-              <i class="primitive dot brown icon"></i> 93
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="content">
-          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
-          <i class="mortar board blue icon"></i>
-          <div class="right floated meta">
-            <i class="globe green icon"></i>
-          </div>
-        </div>
-        <div class="content">
-          Cambridge, United Kingdom<br />
-          python, python-3.x, python-2.7
-        </div>
-        <div class="extra content">
-          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
-          <span class="right floated">
-            <span class="gold-badge">
-              <i class="primitive dot yellow icon"></i> 12
-            </span>
-            <span class="silver-badge">
-              <i class="primitive dot grey icon"></i> 38
-            </span>
-            <span class="bronze-badge">
-              <i class="primitive dot brown icon"></i> 93
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="content">
-          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
-          <i class="mortar board blue icon"></i>
-          <div class="right floated meta">
-            <i class="globe green icon"></i>
-          </div>
-        </div>
-        <div class="content">
-          Cambridge, United Kingdom<br />
-          python, python-3.x, python-2.7
-        </div>
-        <div class="extra content">
-          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
-          <span class="right floated">
-            <span class="gold-badge">
-              <i class="primitive dot yellow icon"></i> 12
-            </span>
-            <span class="silver-badge">
-              <i class="primitive dot grey icon"></i> 38
-            </span>
-            <span class="bronze-badge">
-              <i class="primitive dot brown icon"></i> 93
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="content">
-          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
-          <i class="mortar board blue icon"></i>
-          <div class="right floated meta">
-            <i class="globe green icon"></i>
-          </div>
-        </div>
-        <div class="content">
-          Cambridge, United Kingdom<br />
-          python, python-3.x, python-2.7
-        </div>
-        <div class="extra content">
-          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
-          <span class="right floated">
-            <span class="gold-badge">
-              <i class="primitive dot yellow icon"></i> 12
-            </span>
-            <span class="silver-badge">
-              <i class="primitive dot grey icon"></i> 38
-            </span>
-            <span class="bronze-badge">
-              <i class="primitive dot brown icon"></i> 93
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="content">
-          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
-          <i class="mortar board blue icon"></i>
-          <div class="right floated meta">
-            <i class="globe green icon"></i>
-          </div>
-        </div>
-        <div class="content">
-          Cambridge, United Kingdom<br />
-          python, python-3.x, python-2.7
-        </div>
-        <div class="extra content">
-          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
-          <span class="right floated">
-            <span class="gold-badge">
-              <i class="primitive dot yellow icon"></i> 12
-            </span>
-            <span class="silver-badge">
-              <i class="primitive dot grey icon"></i> 38
-            </span>
-            <span class="bronze-badge">
-              <i class="primitive dot brown icon"></i> 93
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="content">
-          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
-          <i class="mortar board blue icon"></i>
-          <div class="right floated meta">
-            <i class="globe green icon"></i>
-          </div>
-        </div>
-        <div class="content">
-          Cambridge, United Kingdom<br />
-          python, python-3.x, python-2.7
-        </div>
-        <div class="extra content">
-          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
-          <span class="right floated">
-            <span class="gold-badge">
-              <i class="primitive dot yellow icon"></i> 12
-            </span>
-            <span class="silver-badge">
-              <i class="primitive dot grey icon"></i> 38
-            </span>
-            <span class="bronze-badge">
-              <i class="primitive dot brown icon"></i> 93
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="card">
-        <div class="content">
-          <img class="ui avatar image" src="//www.gravatar.com/avatar/a43c265710a708ee6729b23349c24ee8?s=200&amp;d=retro"> Elliot
-          <i class="mortar board blue icon"></i>
-          <div class="right floated meta">
-            <i class="globe green icon"></i>
-          </div>
-        </div>
-        <div class="content">
-          Cambridge, United Kingdom<br />
-          python, python-3.x, python-2.7
-        </div>
-        <div class="extra content">
-          <span title="total reputation: 56.238"><i class="ruby yellow icon"></i>56K</span>
-          <span class="right floated">
-            <span class="gold-badge">
-              <i class="primitive dot yellow icon"></i> 12
-            </span>
-            <span class="silver-badge">
-              <i class="primitive dot grey icon"></i> 38
-            </span>
-            <span class="bronze-badge">
-              <i class="primitive dot brown icon"></i> 93
-            </span>
-          </span>
-        </div>
-      </div>
+      {% endfor %}
     </div>
 
     <div class="ui divider container"></div>

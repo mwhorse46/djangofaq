@@ -18,7 +18,7 @@ class QuestionHomePage(ListView):
     template_name = 'app_faq/question_homepage.html'
 
     def get_queryset(self):
-        return self.model.objects.published()
+        return self.model.objects.published().order_by('-created')
 
     def page_range(self):
         return GenericPaginator(

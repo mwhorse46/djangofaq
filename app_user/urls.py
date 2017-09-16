@@ -5,6 +5,24 @@ from django.conf.urls import url
 from app_user.views import *
 
 urlpatterns = [
-    url(r'^users/$', UserListView.as_view(), name='users'),
-    url(r'^users/profile/$', user_profile, name='user_profile'),
+    url(
+        r'^users/$',
+        UserListView.as_view(),
+        name='users'
+    ),
+    url(
+        r'^users/(?P<pk>[\d-]+)/$',
+        UserProfileRedirectView.as_view(),
+        name='user_profile_redirect'
+    ),
+    url(
+        r'^users/(?P<pk>[\d-]+)/(?P<username>[\w\-]+)/$',
+        UserProfile.as_view(),
+        name='user_profile'
+    ),
+    url(
+        r'^users/edit/(?P<pk>[\d-]+)/$',
+        UserProfileEdit.as_view(),
+        name='user_profile_edit'
+    ),
 ]

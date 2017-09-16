@@ -16,7 +16,7 @@ class TagListView(ListView):
     template_name = 'app_faq/tags.html'
 
     def get_queryset(self):
-        return self.model.objects.all()
+        return self.model.objects.order_by('-created')
 
     def page_range(self):
         return GenericPaginator(

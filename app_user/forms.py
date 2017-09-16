@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from nocaptcha_recaptcha.fields import NoReCaptchaField
 from allauth.account.forms import (LoginForm, SignupForm,
                                    ResetPasswordForm, ResetPasswordKeyForm)
+from app_user.models import Profile
 
 
 class LoginForm(LoginForm):
@@ -150,3 +151,18 @@ class SendEmailForm(forms.Form):
     """
     subject = forms.CharField(widget=forms.TextInput())
     message = forms.CharField(widget=forms.TextInput())
+
+
+class ProfileForm(forms.ModelForm):
+    """
+    profile form
+    """
+    class Meta:
+        model = Profile
+        fields = '__all__'
+        exclude = ['user', ]
+        widgets = {
+            'birth_date': forms.DateInput(
+                attrs={'class': 'ui calendar', 'placeholder': 'YYYY-MM-DD'}
+            )
+        }

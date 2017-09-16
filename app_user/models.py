@@ -9,8 +9,11 @@ from django.utils.translation import ugettext_lazy as _
 
 @python_2_unicode_compatible
 class Profile(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         User, related_name='profile_user')
+
+    display_name = models.CharField(
+        _('Display name'), max_length=200, null=True, blank=True)
 
     location = models.CharField(
         _('Location'), max_length=200, null=True, blank=True)
@@ -29,6 +32,9 @@ class Profile(models.Model):
 
     github = models.URLField(
         _('Github'), null=True, blank=True)
+
+    birth_date = models.DateField(
+        _('Birth date'), null=True, blank=True)
 
     def __str__(self):
         return self.user.username
