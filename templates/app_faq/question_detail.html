@@ -71,11 +71,11 @@
                               {% blocktrans with time=question.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
                             </a>
                             <div class="comment user-info-signature">
-                              <a class="avatar">
+                              <a class="avatar spf-link" href="{% url 'user_profile' pk=question.editor.pk username=question.editor.username %}">
                                 <img src="{{ question.editor.email|gravatar:'75' }}">
                               </a>
                               <div class="content">
-                                <a class="author">{{ question.editor }}</a>
+                                <a class="author spf-link" href="{% url 'user_profile' pk=question.editor.pk username=question.editor.username %}">{{ question.editor }}</a>
                                 <div class="text">
                                   <span class="reputation">
                                     <i class="small ruby orange icon"></i> <b>269K</b>
@@ -102,11 +102,11 @@
                             {% blocktrans with time=question.created|timesince %}asked {{ time }} ago{% endblocktrans %}
                           </span>
                           <div class="comment user-info-signature">
-                            <a class="avatar">
+                            <a class="avatar spf-link" href="{% url 'user_profile' pk=question.author.pk username=question.author.username %}">
                               <img src="{{ question.author.email|gravatar:'75' }}">
                             </a>
                             <div class="content">
-                              <a class="author">{{ question.author }}</a>
+                              <a class="author spf-link" href="{% url 'user_profile' pk=question.author.pk username=question.author.username %}">{{ question.author }}</a>
                               <div class="text">
                                 <span class="reputation">
                                   <i class="small ruby orange icon"></i> <b>269K</b>
@@ -227,11 +227,11 @@
                                 {% blocktrans with time=answer.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
                               </a>
                               <div class="comment user-info-signature">
-                                <a class="avatar">
-                                  <img src="{{ question.editor.email|gravatar:'75' }}">
+                                <a class="avatar spf-link" href="{% url 'user_profile' pk=answer.editor.pk username=answer.editor.username %}">
+                                  <img src="{{ answer.editor.email|gravatar:'75' }}">
                                 </a>
                                 <div class="content">
-                                  <a class="author">{{ answer.editor }}</a>
+                                  <a class="author spf-link" href="{% url 'user_profile' pk=answer.editor.pk username=answer.editor.username %}">{{ answer.editor }}</a>
                                   <div class="text">
                                     <span class="reputation">
                                       <i class="small ruby orange icon"></i> <b>269K</b>
@@ -257,11 +257,11 @@
                               {% blocktrans with time=answer.created|timesince %}answered {{ time }} ago{% endblocktrans %}
                             </span>
                             <div class="comment user-info-signature">
-                              <a class="avatar">
+                              <a class="avatar spf-link" href="{% url 'user_profile' pk=answer.author.pk username=answer.author.username %}">
                                 <img src="{{ answer.author.email|gravatar:'75' }}">
                               </a>
                               <div class="content">
-                                <a class="author">{{ answer.author }}</a>
+                                <a class="author spf-link" href="{% url 'user_profile' pk=answer.author.pk username=answer.author.username %}">{{ answer.author }}</a>
                                 <div class="text">
                                   <span class="reputation">
                                     <i class="small ruby orange icon"></i> <b>269K</b>

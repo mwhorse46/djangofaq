@@ -121,11 +121,14 @@
                 <div class="ui right floated user-info">
                   <div class="ui items">
                     <div class="item">
-                      <a class="ui tiny image">
+                      <a class="ui tiny image spf-link" href="{% url 'user_profile' pk=question.author.pk username=question.author.username %}">
                         <img src="{{ question.author.email|gravatar:'75' }}">
                       </a>
                       <div class="content">
-                        <a class="ui blue small header">{{ question.author }}</a>
+                        <a class="ui blue small header spf-link"
+                          href="{% url 'user_profile' pk=question.author.pk username=question.author.username %}">
+                          {{ question.author }}
+                        </a>
                         <div class="description">
                           <span class="reputation">
                             <i class="small ruby orange icon"></i> <b>269K</b>

@@ -67,8 +67,7 @@ class UserProfileEdit(LoginRequiredMixin, UpdateView):
     template_name = 'app_user/user_profile_edit.html'
 
     def get_success_url(self):
-        return reverse('user_profile_edit',
-                       kwargs={'pk': self.request.user.pk})
+        return reverse('user_profile_edit')
 
     def get_object(self, queryset=None):
         profile, truefalse = Profile.objects.get_or_create(user=self.request.user)

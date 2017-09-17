@@ -21,7 +21,7 @@ urlpatterns = [
         name='user_profile'
     ),
     url(
-        r'^users/edit/(?P<pk>[\d-]+)/$',
+        r'^users/edit/$',
         UserProfileEdit.as_view(),
         name='user_profile_edit'
     ),

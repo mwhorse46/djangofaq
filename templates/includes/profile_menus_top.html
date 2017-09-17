@@ -1,16 +1,20 @@
 {% load i18n %}
-<div class="repo ribbon">
-  <div class="ui tabular menu">
-    <div class="ui container">
-      <a class="item">
-        <i class="person icon"></i> Profile
-      </a>
-      <a class="item">
-        <i class="rss icon"></i> Activity
-      </a>
-      <a class="active item">
-        <i class="gear icon"></i> Edit Profile &amp; Settings
-      </a>
+
+{% if request.user.is_authenticated %}
+  <div class="repo ribbon">
+    <div class="ui tabular menu">
+      <div class="ui container">
+        <a class="item spf-link view-profile-menu-top" href="{% url 'user_profile_redirect' pk=request.user.pk %}">
+          <i class="person icon"></i> {% trans "Profile" %}
+        </a>
+        <a class="item spf-link activity-menu-top">
+          <i class="rss icon"></i> {% trans "Activity" %}
+        </a>
+        <a class="item spf-link edit-profile-menu-top {% if request.resolver_match.url_name == 'user_profile_edit' %}active{% endif %}"
+          href="{% url 'user_profile_edit' %}">
+          <i class="gear icon"></i> {% trans "Edit Profile &amp; Settings" %}
+        </a>
+      </div>
     </div>
   </div>
-</div>
+{% endif %}

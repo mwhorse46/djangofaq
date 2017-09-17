@@ -19,7 +19,7 @@
         <div class="ui divider"></div>
 
         {% if messages %}
-        <div class="ui yellow message">
+        <div class="ui warning message">
           <ul class="ui list">
             {% for message in messages %}
               <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
@@ -160,8 +160,8 @@
             </div>
           </div>
           <div class="field">
-            <button type="submit" class="ui primary right floated button">
-              <i class="pencil icon"></i> {% trans "Save Profile" %}
+            <button type="submit" class="ui blue right floated button">
+              <i class="check icon"></i> {% trans "Save Profile" %}
             </button>
           </div>
         </form>

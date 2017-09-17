@@ -3,22 +3,7 @@
 
 {% block content %}
   <div class="page content">
-    <div class="repo ribbon">
-      <div class="ui tabular menu">
-        <div class="ui container">
-          <a class="item">
-            <i class="person icon"></i> Profile
-          </a>
-          <a class="active item">
-            <i class="rss icon"></i> Activity
-          </a>
-          <a class="item">
-            <i class="gear icon"></i> Edit Profile &amp; Settings
-          </a>
-        </div>
-      </div>
-    </div>
-
+    {% include "includes/profile_menus_top.html" %}
     <div class="ui grid container">
       <div class="seven wide column">
         <div class="ui segment no-radius segment-profile-reputation">
@@ -435,4 +420,8 @@
     </div><!-- end /.grid container -->
 
   </div><!-- end /.page.content -->
+{% endblock %}
+
+{% block js %}
+  <script>$('.view-profile-menu-top').addClass('active');</script>
 {% endblock %}
