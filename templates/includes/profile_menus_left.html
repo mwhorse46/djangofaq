@@ -4,7 +4,7 @@
   <div class="ui secondary vertical pointing fluid menu">
     <a class="item spf-link edit-profile-menu-left {% if request.resolver_match.url_name == 'user_profile_edit' %}active{% endif %}"
       href="{% url 'user_profile_edit' %}">
-      <i class="person icon"></i> {% trans "Edit Profile" %}
+      <i class="user icon"></i> {% trans "Edit Profile" %}
     </a>
     <a class="item spf-link edit-email-menu-left {% if request.resolver_match.url_name == 'account_email' %}active{% endif %}"
       href="{% url 'account_email' %}">
@@ -16,7 +16,7 @@
     </a>
     <a class="item spf-link edit-social-menu-left {% if request.resolver_match.url_name == 'socialaccount_connections' %}active{% endif %}"
       href="{% url 'socialaccount_connections' %}">
-      <i class="git branch icon"></i> {% trans "Social Connections" %}
+      <i class="share alternate icon"></i> {% trans "Social Connections" %}
     </a>
   </div>
 {% endif %}

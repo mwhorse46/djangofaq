@@ -36,7 +36,7 @@
                   <img src="{{ user.email|gravatar:'200' }}">
                 </div>
                 <a class="ui bottom attached tiny button" href="//gravatar.com" target="_blank">
-                  <i class="pencil small icon"></i> {% trans "Change Gravatar" %}
+                  <i class="pencil icon"></i> {% trans "Change Gravatar" %}
                 </a>
               </div>
             </div>
@@ -59,7 +59,7 @@
                 <label>{{ form.location.label }}</label>
                 <div class="ui left icon input">
                   {{ form.location }}
-                  <i class="location icon"></i>
+                  <i class="marker icon"></i>
                 </div>
                 {% if form.location.errors %}
                   <div class="ui pointing red basic label">
@@ -99,12 +99,12 @@
               </div>
             {% endif %}
           </div>
-          <div class="ui two fields">
+          <div class="ui two fields" style="padding: 0 .5em">
             <div class="field">
               <label>{{ form.website.label }}</label>
               <div class="ui left icon input">
                 {{ form.website }}
-                <i class="globe icon"></i>
+                <i class="linkify icon"></i>
               </div>
               {% if form.website.errors %}
                 <div class="ui pointing red basic label">
@@ -118,7 +118,7 @@
               <label>{{ form.twitter.label }}</label>
               <div class="ui left icon input">
                 {{ form.twitter }}
-                <i class="globe icon"></i>
+                <i class="twitter icon"></i>
               </div>
               {% if form.twitter.errors %}
                 <div class="ui pointing red basic label">
@@ -129,12 +129,12 @@
               {% endif %}
             </div>
           </div>
-          <div class="ui two fields">
+          <div class="ui two fields" style="padding: 0 .5em">
             <div class="field">
               <label>{{ form.linkedin.label }}</label>
               <div class="ui left icon input">
                 {{ form.linkedin }}
-                <i class="globe icon"></i>
+                <i class="linkedin icon"></i>
               </div>
               {% if form.linkedin.errors %}
                 <div class="ui pointing red basic label">
@@ -148,7 +148,7 @@
               <label>{{ form.github.label }}</label>
               <div class="ui left icon input">
                 {{ form.github }}
-                <i class="mark github icon"></i>
+                <i class="github icon"></i>
               </div>
               {% if form.github.errors %}
                 <div class="ui pointing red basic label">

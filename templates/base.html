@@ -22,8 +22,11 @@
   <meta name="keywords" content=""/>
   {% endblock %}
 
-  <!--<link href="{% static 'css/semantic.min.css' %}" rel="stylesheet" media="all">-->
+  {% block core_css %}
+  <link href="{% static 'plugins/css/semantic.min.css' %}" rel="stylesheet" media="all">
   <link href="{% static 'css/github/global-github-theme.min.css' %}" rel="stylesheet" media="all">
+  {% endblock %}
+
   <link href="{% static 'css/spfjs.css' %}" rel="stylesheet" media="all">
   <link href="{% static 'css/djangofaq.css' %}" rel="stylesheet" media="all">
   {% block css %}{% endblock %}

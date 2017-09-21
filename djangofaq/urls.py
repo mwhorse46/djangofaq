@@ -29,6 +29,7 @@ urlpatterns = [
 
     # 3d party apps
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^martor/', include('martor.urls')),
 
     # major apps
     url(r'^', include('app_faq.urls')),

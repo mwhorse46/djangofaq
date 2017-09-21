@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 from app_faq.views.question import *
+from app_faq.views.answer import *
 from app_faq.views.tag import *
 
 urlpatterns = [
@@ -20,6 +21,16 @@ urlpatterns = [
         r'^question/(?P<pk>[\d-]+)/(?P<slug>[\w\-]+)/$',
         QuestionDetail.as_view(),
         name='question_detail'
+    ),
+    url(
+        r'^question/create/$',
+        QuestionCreate.as_view(),
+        name='question_create'
+    ),
+    url(
+        r'^answer/(?P<question_id>[\d-]+)/create/$',
+        AnswerFormView.as_view(),
+        name='answer_create'
     ),
     url(
         r'^tags/$',

@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django.utils.text import slugify
 
 # from draceditor.models import DraceditorField
 from updown.fields import RatingField
@@ -83,6 +84,24 @@ class Question(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def _unique_slug(self):
+        """
+        return unique slug if origin slug is exist.
+        eg: `foo-bar` => `foo-bar-1`
+        """
+        origin_slug = slugify(self.title)
+        unique_slug = origin_slug
+        numb = 1
+        while Question.objects.filter(slug=unique_slug).exists():
+            unique_slug = '%s-%d' % (origin_slug, numb)
+            numb += 1
+        return unique_slug
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self._unique_slug()
+        super(Question, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = _('questions')

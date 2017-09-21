@@ -2,13 +2,19 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
+from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.shortcuts import get_object_or_404
-from django.views.generic import (ListView, DetailView)
+from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import (get_object_or_404, redirect)
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (ListView, DetailView, FormView)
 from django.views.generic.base import RedirectView
 
 from app_faq.utils.paginator import GenericPaginator
 from app_faq.models.question import Question
+from app_faq.models.tag import Tag
+from app_faq.forms.answer import AnswerForm
+from app_faq.forms.question import QuestionForm
 
 
 class QuestionHomePage(ListView):
@@ -48,3 +54,22 @@ class QuestionDetail(DetailView):
     model = Question
     context_object_name = 'question'
     template_name = 'app_faq/question_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionDetail, self).get_context_data(**kwargs)
+        context['answer_form'] = AnswerForm
+        return context
+
+
+class QuestionCreate(LoginRequiredMixin, FormView):
+    template_name = 'app_faq/question_create.html'
+    form_class = QuestionForm
+
+    def form_valid(self, form):
+        initial = form.save(commit=False)
+        initial.author = self.request.user
+        print(self.request.POST.get('tags'))
+        # initial.tags = Tag
+        # initial.save_m2m()
+        messages.success(self.request, _('Question successfully created!'))
+        # return redirect(reverse('question_redirect', kwargs={'pk': initial.pk}))

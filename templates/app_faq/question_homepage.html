@@ -54,7 +54,7 @@
             Votes
           </a>
           <a class="item">
-            <i class="pulse icon"></i>
+            <i class="wait icon"></i>
             Active
           </a>
           <a class="item">
@@ -106,7 +106,7 @@
               </div>
             </div>
             <div class="content">
-              <a href="{% url 'question_detail' pk=question.pk slug=question.slug %}" class="ui blue header spf-link">{{ question.title }}</a>
+              <a href="{% url 'question_detail' pk=question.pk slug=question.slug %}" class="ui blue header no-bold spf-link">{{ question.title }}</a>
               <div class="meta">
                 <span class="date">asked {{ question.created }} - {{ question.created|timesince }} {% trans "ago" %}</span>
               </div>
@@ -131,19 +131,19 @@
                         </a>
                         <div class="description">
                           <span class="reputation">
-                            <i class="small ruby orange icon"></i> <b>269K</b>
+                            <i class="diamond orange icon"></i> <b>269K</b>
                           </span>
                           &nbsp;
                           <span class="gold-badge">
-                            <i class="primitive dot yellow icon"></i> 12
+                            <i class="circle small yellow icon"></i> 12
                           </span>
                           &nbsp;
                           <span class="silver-badge">
-                            <i class="primitive dot grey icon"></i> 38
+                            <i class="circle small grey icon"></i> 38
                           </span>
                           &nbsp;
                           <span class="bronze-badge">
-                            <i class="primitive dot brown icon"></i> 93
+                            <i class="circle small brown icon"></i> 93
                           </span>
                         </div>
                       </div>
@@ -167,7 +167,7 @@
                   {% trans "prev" %}
                 </a>
               {% endif %}
-              <a class="item spf-link" href="?page=1">1</a>
+              <a class="item spf-link" href="?page=1">first</a>
 
               <!--{% if page_obj.paginator.num_pages not in page_range %}
                 <div class="disabled item">...</div>
@@ -187,9 +187,11 @@
                 <div class="disabled item">...</div>
               {% endif %}-->
 
-              {% if page_obj.paginator.num_pages > 5 and page_obj.paginator.num_pages not in page_range %}
+              <a class="item spf-link" href="?page={{ page_obj.paginator.num_pages }}">last</a>
+
+              <!--{% if page_obj.paginator.num_pages > 5 and page_obj.paginator.num_pages not in page_range %}
                 <a class="item spf-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
-              {% endif %}
+              {% endif %}-->
 
               {% if page_obj.has_next %}
                 <a class="item spf-link" href="?page={{ page_obj.next_page_number }}">
@@ -228,19 +230,19 @@
           <div class="sidebar-bulletin">
             <div class="ui list">
               <a class="item no-underline">
-                <i class="flame icon"></i>
+                <i class="lightning icon"></i>
                 <div class="content">
                   An excellent polish restaurant, quick delivery and hearty
                 </div>
               </a>
               <a class="item no-underline">
-                <i class="flame icon"></i>
+                <i class="lightning icon"></i>
                 <div class="content">
                   A taste of Shaanxi's delicious culinary traditions
                 </div>
               </a>
               <a class="item no-underline">
-                <i class="flame icon"></i>
+                <i class="lightning icon"></i>
                 <div class="content">
                   Greenpoint's best choice for quick and delicious sushi.
                 </div>

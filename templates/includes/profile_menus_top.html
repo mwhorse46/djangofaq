@@ -5,14 +5,14 @@
     <div class="ui tabular menu">
       <div class="ui container">
         <a class="item spf-link view-profile-menu-top" href="{% url 'user_profile_redirect' pk=request.user.pk %}">
-          <i class="person icon"></i> {% trans "Profile" %}
+          <i class="user icon"></i> {% trans "Profile" %}
         </a>
         <a class="item spf-link activity-menu-top">
           <i class="rss icon"></i> {% trans "Activity" %}
         </a>
         <a class="item spf-link edit-profile-menu-top {% if request.resolver_match.url_name == 'user_profile_edit' %}active{% endif %}"
           href="{% url 'user_profile_edit' %}">
-          <i class="gear icon"></i> {% trans "Edit Profile &amp; Settings" %}
+          <i class="settings icon"></i> {% trans "Edit Profile &amp; Settings" %}
         </a>
       </div>
     </div>

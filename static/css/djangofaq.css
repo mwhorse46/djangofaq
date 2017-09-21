@@ -439,9 +439,11 @@
 }
 
 .ui.items>.item>.content>.description.content-description-detail {
+  background: none;
   line-height: 22px;
   font-size: 14px;
   color: #333;
+  padding: 0;
 }
 
 .tags-question-detail .ui.label {
@@ -468,4 +470,10 @@
 }
 .ui.attached.buttons.radius-two-buttons .ui.linkedin.button {
   border-radius: 0 2px 2px 0;
+}
+
+.ui.segment.post-action-segment {
+  box-shadow: none;
+  padding: 5px;
+  padding-right: 0;
 }

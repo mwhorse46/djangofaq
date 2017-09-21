@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+{% load common_tags martortags %}
+{% block title %}{% trans "Ask a Question" %} :: {{ block.super }}{% endblock %}
+
+{% block css %}
+  <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+  <link href="{% static 'plugins/css/resizable.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+  <link href="{% static 'css/martor/martor.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="page content">
+  <div class="repo ribbon ribbon-detail">
+    <div class="ui container">
+      <div class="ui massive breadcrumb breadcrumb-title-detail">{% trans "Ask a Question" %}</div>
+      <div class="repo options">
+        <div class="ui small primary button">
+          Ask Question
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui equal width vertically padded grid container">
+    <div class="twelve wide column">
+      <div class="answer-main" style="display:none">
+        <form class="ui form" method="post">
+          {% csrf_token %}
+          <div class="field">
+            <label>{{ form.title.label }} *</label>
+            <div class="ui left icon input">
+              {{ form.title }}
+              <i class="terminal icon"></i>
+            </div>
+            {% if form.title.errors %}
+              <div class="ui pointing red basic label">
+                {% for error in form.title.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="field">
+            {{ form.description }}
+          </div>
+          <div class="field">
+            <label>{% trans "Tags " %} *</label>
+            <div class="ui left icon input">
+              <input type="text" name="tags" placeholder="{% trans 'at least one tag such as (objective-c node.js database), max 5 tags' %}" maxlength="200" required>
+              <i class="tags icon"></i>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui clearing segment no-border post-action-segment">
+              <button class="ui right floated positive button post-answer-button" type="submit" disabled>
+                <i class="check icon"></i> {% trans "Post Your Answer" %}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div><!-- end /.answer-main -->
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js %}
+  <script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
+  <script type="text/javascript" src="{% static 'plugins/js/mode-markdown.js' %}"></script>
+  <script type="text/javascript" src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
+  <script type="text/javascript" src="{% static 'plugins/js/theme-github.js' %}"></script>
+  <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'plugins/js/resizable.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'plugins/js/emojis.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/martor.min.js' %}"></script>
+  <script>
+    setTimeout(function(){$('.answer-main').show()}, 1000);
+    $('.tab-martor-menu').removeClass('secondary pointing');
+    $('.martor-preview pre').each(function(i, block){hljs.highlightBlock(block)});
+    $(document).keyup(function(){
+      if($('textarea[name=description]').val().length >= 10) {
+        $('.post-answer-button').removeAttr('disabled');
+      }else {
+        $('.post-answer-button').attr({'disabled': 'disabled'});
+      }
+    });
+  </script>
+{% endblock %}

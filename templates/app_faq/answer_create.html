@@ -1,0 +1,13 @@
+{% load i18n staticfiles %}
+<form class="ui form" method="post">{% csrf_token %}
+  <div class="field">
+    {{ answer_form.description }}
+  </div>
+  <div class="field">
+    <div class="ui clearing segment">
+      <button class="ui right floated positive button">
+        <i class="check icon"></i> {% trans "Post Your Answer" %}
+      </button>
+    </div>
+  </div>
+</form>
