@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<p class="highlight">
+  {% for item1, item2 in change_info.changed_items %}
+    <a class="ui label no-underline"><del>{{ item1 }}</del> &rarr; <ins>{{ item2 }}</ins></a>
+  {% endfor %}
+
+  {% for item in change_info.removed_items %}
+    <a class="ui label no-underline no-radius"><del>- {{ item }}</del></a>
+  {% endfor %}
+  {% for item in change_info.removed_missing_objects %}
+    <a class="ui label no-underline no-radius"><del>- {{ item }}</del> <sup class="follow">*</sup></a>
+  {% endfor %}
+
+  {% for item in change_info.deleted_items %}
+    <del>- {{ item }}</del>  &rarr; Deleted</label>
+  {% endfor %}
+
+  {% for item in change_info.added_items %}
+    <a class="ui label no-underline no-radius"><ins>+ {{ item }}</ins></a>
+  {% endfor %}
+  {% for item in change_info.added_missing_objects %}
+    <a class="ui label no-underline no-radius"><ins>+ {{ item }}</ins> <sup class="follow">*</sup></a>
+  {% endfor %}
+
+  {% for item in change_info.same_items %}
+    <a class="ui label no-underline no-radius">{{ item }}</a>
+  {% endfor %}
+  {% for item in change_info.same_missing_objects %}
+    <a class="ui label no-underline no-radius">{{ item }} <sup class="follow">*</sup></a>
+  {% endfor %}
+</p>

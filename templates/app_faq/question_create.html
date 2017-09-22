@@ -40,15 +40,20 @@
               </div>
             {% endif %}
           </div>
+          <div class="ui divider padded no-border"></div>
           <div class="field">
             {{ form.description }}
           </div>
           <div class="field">
-            <label>{% trans "Tags " %} *</label>
-            <div class="ui left icon input">
-              <input type="text" name="tags" placeholder="{% trans 'at least one tag such as (objective-c node.js database), max 5 tags' %}" maxlength="200" required>
-              <i class="tags icon"></i>
-            </div>
+            <label>{{ form.tags.label }} *</label>
+            {{ form.tags }}
+            {% if form.tags.errors %}
+              <div class="ui pointing red basic label">
+                {% for error in form.tags.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
           <div class="field">
             <div class="ui clearing segment no-border post-action-segment">
@@ -59,6 +64,88 @@
           </div>
         </form>
       </div><!-- end /.answer-main -->
+    </div>
+    <div class="column right-sidebar">
+      <div class="ui fluid right vertical">
+        <div class="sidebar-help sidebar-bulletin sidebar-help-title">
+          <h3 class="ui header">{% trans "How to Ask" %}</h3>
+          <p>Is your question about programming?</p>
+          <p>We prefer questions that can be answered, not just discussed.</p>
+          <p>Provide details. Share your research.</p>
+          <p>If your question is about this website, <a>ask it on meta</a> instead.</p>
+        </div>
+        <div class="sidebar-help sidebar-bulletin sidebar-help-description" style="display:none">
+          <h3 class="ui header">{% trans "How to Format" %}</h3>
+          <div class="ui list">
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">put returns between paragraphs</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">for linebreak add 2 spaces at end</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content"><i>_italic_</i> or <strong>**bold**</strong></div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">indent code by 4 spaces</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">backtick escapes <code>`like _so_`</code></div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">quote by placing > at start of line</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">to make links [foo](http://foo.com)</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-help sidebar-bulletin sidebar-help-tags" style="display:none">
+          <h3 class="ui header">{% trans "How to Tag" %}</h3>
+          <p>
+            A tag is a keyword or label that categorizes your question with other, similar questions.
+            Choose one or more (up to 5) tags that will help answerers to find and interpret your question.
+          </p>
+          <div class="ui list">
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">complete the sentence: <i>my question is about...</i></div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">use tags that describe things or concepts that are essential, not incidental to your question</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">favor using existing <a>popular tags</a></div>
+            </div>
+          </div>
+          <p>If your question is primarily about a topic for which you can't find a tag:</p>
+          <div class="ui list">
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">
+                combine multiple words into single-words with hyphens
+                (e.g. <label class="ui small label">ruby-on-rails</label>), up to a maximum of 35
+              </div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">
+                <a>creating new tags is a privilege</a>; if you can't yet create a tag you need,
+                then post this question without it, then <a>ask the community to create it for you</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -77,12 +164,43 @@
     setTimeout(function(){$('.answer-main').show()}, 1000);
     $('.tab-martor-menu').removeClass('secondary pointing');
     $('.martor-preview pre').each(function(i, block){hljs.highlightBlock(block)});
-    $(document).keyup(function(){
+    //$('.ui.search.tags-dropdown').dropdown({maxSelections: 5, transition: 'fade up'});
+    $('.ui.search.tags-dropdown').dropdown({
+      placeholder: '{% trans "at least one tag such as (sql css mysql), max 5 tags" %}',
+      allowAdditions: false,
+      apiSettings: {
+        url: '{% url "tags_search_json" %}?q={query}'
+      },
+      fields: {
+        remoteValues : 'results',
+        name         : 'title',
+        text         : 'title',
+        value        : 'id'
+      },
+    });
+
+    var disabledPostButton = function() {
       if($('textarea[name=description]').val().length >= 10) {
         $('.post-answer-button').removeAttr('disabled');
       }else {
         $('.post-answer-button').attr({'disabled': 'disabled'});
       }
+    }
+    disabledPostButton();
+    $(document).keyup(function(){disabledPostButton()});
+
+    var showHelp = function(selector) {
+      $('.sidebar-help').hide();
+      $(selector).show();
+    }
+    $(document).on('click', '.martor-field-description', function(){
+      showHelp('.sidebar-help-description');
+    });
+    $('#id_title').click(function(){
+      showHelp('.sidebar-help-title');
+    });
+    $('.tags-dropdown').click(function(){
+      showHelp('.sidebar-help-tags');
     });
   </script>
 {% endblock %}

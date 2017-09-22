@@ -13,10 +13,29 @@ from app_faq.models.message import Message
 from app_faq.models.question import Question
 from app_faq.models.tag import Tag
 
+
+from app_faq.admin.answer import AnswerAdmin
+from app_faq.admin.bounty import (BountyAdmin, BountyAwardAdmin)
+from app_faq.admin.comment import CommentAdmin
+from app_faq.admin.favorite import FavoriteAdmin
+from app_faq.admin.flag import FlagAdmin
+from app_faq.admin.help import HelpAdmin
+from app_faq.admin.message import MessageAdmin
 from app_faq.admin.tag import TagAdmin
+from app_faq.admin.question import QuestionAdmin
 
+admin.site.register(Answer, AnswerAdmin)
+admin.site.register(Bounty, BountyAdmin)
+admin.site.register(BountyAward, BountyAwardAdmin)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(Favorite, FavoriteAdmin)
+admin.site.register(Flag, FlagAdmin)
+admin.site.register(Help, HelpAdmin)
+admin.site.register(Message, MessageAdmin)
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Tag, TagAdmin)
 
-admin.site.register(Answer)
+"""
 admin.site.register(Bounty)
 admin.site.register(BountyAward)
 admin.site.register(Comment)
@@ -25,4 +44,5 @@ admin.site.register(Flag)
 admin.site.register(Help)
 admin.site.register(Message)
 admin.site.register(Question)
-admin.site.register(Tag, TagAdmin)
+admin.site.register(Tag)
+"""

@@ -1,0 +1,62 @@
+{% load i18n l10n %}
+{% load common_tags %}
+{% if compare_view %}<form method="GET" action="{{ action }}">{% endif %}
+<table id="change-history" class="ui selectable striped table">
+  <thead>
+    <tr>
+      {% if compare_view %}
+        <th>
+          {% if comparable %}
+            <button class="ui small blue button" type="submit"><i class="exchange icon"></i> {% trans 'compare' %}</button>
+          {% else %}
+            <i>{% trans 'compare' %}</i>
+          {% endif %}
+        </th>
+      {% endif %}
+      <th class="ui grey color"><i class="time icon"></i> {% trans 'Date/time' %}</th>
+      <th class="ui grey color"><i class="user icon"></i> {% trans 'Editor' %}</th>
+      <th class="ui grey color"><i class="comment icon"></i> {% trans 'Comment' %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for action in action_list %}
+      <tr>
+        {% if compare_view %}
+          <td>
+            {% if comparable %}
+              <div class="ui radio checkbox">
+               <input type="radio" name="version_id1" value="{{ action.version.pk|unlocalize }}" {% if action.first %}style="visibility:hidden" {% endif %}{% if version1.pk|unlocalize == action.version.pk|unlocalize or action.second %}checked="checked"{% endif%}/>
+             </div>
+             <div class="ui radio checkbox">
+               <input type="radio" name="version_id2" value="{{ action.version.pk|unlocalize }}" {% if version2.pk|unlocalize == action.version.pk|unlocalize or action.first == 1 %}checked="checked"{% endif%}/>
+             </div>
+            {% else %}
+               <i>-</i>
+            {% endif %}
+          </td>
+        {% endif %}
+
+        <td>
+          {% if action.url %}
+            <a href="{{action.url}}">{{action.revision.date_created|date:_("DATETIME_FORMAT")}}</a>
+          {% else %}
+            {{action.revision.date_created|date:_("DATETIME_FORMAT")}}
+          {% endif %}
+        </td>
+        <td>
+        {% if action.revision.user %}
+          <h4 class="ui image header">
+            <img src="{{ action.revision.user.email|gravatar:'75' }}" class="ui mini rounded image">
+            <div class="content">{{ action.revision.user.username }}
+              <div class="sub header">Human Resources
+              </div>
+            </div>
+          </h4>
+        {% endif %}
+        </td>
+        <td>{{ action.revision.comment|default:"" }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if compare_view %}</form>{% endif %}

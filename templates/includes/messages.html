@@ -1,0 +1,12 @@
+{% if messages %}
+  <div class="main-messages">
+    <div class="ui container">
+      {% for message in messages %}
+        <div class="ui {% if message.tags %}{{ message.tags }}{% endif %} message">
+          <i class="close icon"></i>
+          <div class="content"><i class="info circle icon"></i> {{ message }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

@@ -13,6 +13,9 @@
 .ui.link {
   cursor: pointer;
 }
+.ui.padded {
+  padding: .5em;
+}
 .ui.blue.color {
   color: #4183C4!important;
 }
@@ -476,4 +479,12 @@
   box-shadow: none;
   padding: 5px;
   padding-right: 0;
+}
+
+
+/* Messages */
+.main-messages {
+  border-bottom: 1px solid #eee;
+  background: #fafafa;
+  padding: 1em 0;
 }

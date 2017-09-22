@@ -12,10 +12,13 @@ class QuestionForm(forms.ModelForm):
 
     class Meta:
         model = Question
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'tags']
         widgets = {
-            'title': forms.TextInput(
-                attrs={'placeholder': _("What's your programming question? Be specific.")}
-            ),
+            'tags': forms.SelectMultiple(attrs={'class': 'ui search fluid dropdown tags-dropdown'}),
+            'title': forms.TextInput(attrs={'placeholder': _("What's your programming question? Be specific.")}),
             'description': AdminMartorWidget()
         }
+
+# def __init__(self, *args, **kwargs):
+#    super(QuestionForm, self).__init__(*args, **kwargs)
+#    self.fields['tags'].widget.attrs = {'class': 'ui search fluid dropdown tags-dropdown'}

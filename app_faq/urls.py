@@ -28,6 +28,16 @@ urlpatterns = [
         name='question_create'
     ),
     url(
+        r'^question/edit/(?P<pk>[\d-]+)/$',
+        QuestionEdit.as_view(),
+        name='question_edit'
+    ),
+    url(
+        r'^question/reversions/(?P<pk>[\d-]+)/$',
+        QuestionReversions.as_view(),
+        name='question_reversions'
+    ),
+    url(
         r'^answer/(?P<question_id>[\d-]+)/create/$',
         AnswerFormView.as_view(),
         name='answer_create'
@@ -41,5 +51,10 @@ urlpatterns = [
         r'^tags/search/offset/$',
         TagSearchOffset.as_view(),
         name='tags_search_offset'
+    ),
+    url(
+        r'^tags/search/json/$',
+        TagSearchJSON.as_view(),
+        name='tags_search_json'
     ),
 ]

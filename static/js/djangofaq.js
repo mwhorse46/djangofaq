@@ -5,7 +5,8 @@ $(document).ready(function() {
       $button       = $('.ui.button'),
       $watchButton  = $('.watch.button'),
       $search       = $('.page.header input'),
-      $popup        = $('[data-content]')
+      $popup        = $('[data-content]'),
+      $checkbox     = $('.ui.checkbox')
     ;
 
     $.fn.dropdown.settings.onShow = function() {
@@ -41,6 +42,8 @@ $(document).ready(function() {
       }
     });
 
+    $checkbox.checkbox();
+
     // Focus wrapper
     $search.on('focus', function() {
       $(this).closest('.input').addClass('focused');
@@ -48,4 +51,13 @@ $(document).ready(function() {
     .on('blur', function() {
       $(this).closest('.input').removeClass('focused');
     });
+
+    // Close a message
+    $('.message .close').on('click', function() {
+      $(this).closest('.message').hide();
+      $('.main-messages').css({'padding': 0, 'border-bottom': 'none'});
+    });
+    setTimeout(function(){
+      $('.main-messages').find('.message .close').trigger('click');
+    }, 5000);
 });

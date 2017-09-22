@@ -2,7 +2,7 @@
 {% load counter %}
 
 {% for tag in tags %}
-  <div class="four wide column tag-column offset-tag-items">
+  <div class="four wide column tag-column offset-tag-items" data-title="{{ tag.title }}" data-slug="{{ tag.slug }}">
     <p><a class="ui small label no-radius">{{ tag.title }}</a> × {{ tag|get_total_questions_tagged }}</p>
     <p class="ui grey color">{{ tag.short_description|safe|striptags|truncatewords:"12" }}</p>
     <p><small class="ui link">532 asked today, 5548 this week</small></p>

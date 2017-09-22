@@ -105,7 +105,7 @@
         </button>
       </form>
       <div class="ui bottom attached warning message">
-        <i class="info circle icon"></i> Already signed up? <a href="{% url 'account_login' %}">Login here</a> instead.
+        <i class="info circle icon"></i> Already signed up? <a href="{% url 'account_login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">Login here</a> instead.
       </div>
     </div>
   </div>

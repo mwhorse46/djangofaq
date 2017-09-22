@@ -7,8 +7,8 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 
-# from draceditor.models import DraceditorField
 from updown.fields import RatingField
+
 from app_faq.models.tag import Tag
 from app_faq.models.time import TimeStampedModel
 

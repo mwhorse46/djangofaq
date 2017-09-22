@@ -6,6 +6,6 @@ from django.contrib import admin
 from reversion_compare.admin import CompareVersionAdmin
 
 
-class FavoriteAdmin(CompareVersionAdmin):
+class MessageAdmin(CompareVersionAdmin):
     #list_display = ['title', 'creator']
     pass

@@ -1,0 +1,18 @@
+{% extends "admin/object_history.html" %}
+{% load i18n l10n %}
+
+{% block content %}
+    <div id="content-main">
+    
+        <p>{% blocktrans %}Choose a date from the list below to revert to a previous version of this object.{% endblocktrans %}</p>
+    
+        <div class="module">
+            {% if action_list %}
+                {% include "reversion-compare/action_list_partial.html" with action="../history/compare/" %}
+            {% else %}
+                <p>{% trans "This object doesn't have a change history. It probably wasn't added via this admin site." %}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

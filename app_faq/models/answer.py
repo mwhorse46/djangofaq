@@ -7,6 +7,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from updown.fields import RatingField
+
 from app_faq.models.question import Question
 from app_faq.models.time import TimeStampedModel
 

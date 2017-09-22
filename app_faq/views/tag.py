@@ -2,9 +2,10 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-from django.views.generic import (ListView, DetailView)
+from django.views.generic import (ListView, DetailView, TemplateView)
 from django.db.models import Q
 
+from app_faq.utils.json import JSONResponseMixin
 from app_faq.utils.paginator import GenericPaginator
 from app_faq.models.tag import Tag
 
@@ -40,3 +41,24 @@ class TagSearchOffset(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         return self.model.objects.filter(Q(title__startswith=query))
+
+
+class TagSearchJSON(JSONResponseMixin, TemplateView):
+    model = Tag
+
+    def render_to_response(self, context, **response_kwargs):
+        return self.render_to_json_response(context, **response_kwargs)
+
+    def get_queryset(self, query):
+        return list(self.model.objects.filter(
+            Q(title__startswith=query)).values('title', 'slug', 'id'))
+
+    def get(self, request, *args, **kwargs):
+        context = {'success': False, 'results': []}
+        query = request.GET.get('q')
+        if query is not None and query.strip() != '':
+            context.update({
+                'success': True,
+                'results': self.get_queryset(query)
+            })
+        return self.render_to_response(context)

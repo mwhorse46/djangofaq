@@ -18,8 +18,7 @@ class AnswerFormView(LoginRequiredMixin, FormView):
     form_class = AnswerForm
 
     def form_valid(self, form):
-        question = get_object_or_404(
-            Question, pk=self.kwargs['question_id'])
+        question = get_object_or_404(Question, pk=self.kwargs['question_id'])
         initial = form.save(commit=False)
         initial.author = self.request.user
         initial.question = question
