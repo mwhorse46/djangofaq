@@ -22,8 +22,8 @@
       <div class="ui container">
         <div class="ui massive breadcrumb breadcrumb-title-detail">{% trans "Revision for" %} "{{ question.title }}"</div>
         <div class="repo options">
-          <a class="ui small basic button spf-link" href="{% url 'question_redirect' pk=question.pk %}">
-            Return to Question
+          <a class="ui small button spf-link" href="{% url 'question_redirect' pk=question.pk %}">
+            {% trans "Return to Question" %}
           </a>
         </div>
       </div>

@@ -66,14 +66,14 @@
                     <tr>
                       <td class="ui grey color no-border sef-actions">
                         <span class="ui link grey color share-action">share</span>
-                        <span class="ui link grey color edit-action">edit</span>
+                        <a href="{% url 'question_edit' pk=question.pk %}" class="ui link grey color spf-link edit-action">{% trans "edit" %}</a>
                         <span class="ui link grey color flag-action">flag</span>
                       </td>
 
                       {% if question.editor %}
                         <td class="no-border user-info user-signature">
                           <div class="ui comments">
-                            <a class="ui link no-underline user-action-time" title="{{ question.modified }}">
+                            <a href="{% url 'question_reversions' pk=question.pk %}" class="ui link no-underline spf-link user-action-time" title="{{ question.modified }}">
                               {% blocktrans with time=question.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
                             </a>
                             <div class="comment user-info-signature">

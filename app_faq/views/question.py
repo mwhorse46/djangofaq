@@ -17,7 +17,7 @@ from reversion.views import RevisionMixin
 from reversion_compare.views import HistoryCompareDetailView
 from reversion import set_comment as reversion_set_comment
 
-from app_faq.utils.revision import html_diff_custom
+#from app_faq.utils.revision import html_diff_custom
 
 from app_faq.utils.paginator import GenericPaginator
 from app_faq.models.question import Question
@@ -89,7 +89,8 @@ class QuestionEdit(LoginRequiredMixin, RevisionMixin, FormView):
     model = Question
 
     def post(self, request, **kwargs):
-        reversion_set_comment("foo bar")
+        comment = request.POST.get('revision_comment', '')
+        reversion_set_comment(comment)
         return super(QuestionEdit, self).post(request, **kwargs)
 
     def get_object(self):
@@ -159,15 +160,14 @@ class QuestionReversions(HistoryCompareDetailView):
         related1, related2 = obj_compare.get_related()
         value1, value2 = force_text(related1), force_text(related2)
         return self.generic_add_remove(related1, related2, value1, value2)
+    """
 
     def compare_ManyToOneRel(self, obj_compare):
         change_info = obj_compare.get_m2o_change_info()
-        context = {"change_info": change_info}
-        return render_to_string("reversion-compare/question/compare_generic_many_to_many.html", context)
+        context = {'change_info': change_info}
+        return render_to_string('reversion-compare/question/compare_generic_many_to_many.html', context)
 
     def compare_ManyToManyField(self, obj_compare):
-        # create a table for m2m compare
         change_info = obj_compare.get_m2m_change_info()
-        context = {"change_info": change_info}
-        return render_to_string("reversion-compare/question/compare_generic_many_to_many.html", context)
-    """
+        context = {'change_info': change_info}
+        return render_to_string('reversion-compare/question/compare_generic_many_to_many.html', context)

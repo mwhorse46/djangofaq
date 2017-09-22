@@ -4,50 +4,27 @@
 <table id="change-history" class="ui selectable striped table">
   <thead>
     <tr>
+      <th><i class="time icon"></i> {% trans "Revisions" %}</th>
       {% if compare_view %}
-        <th>
+        <th colspan="3" class="right aligned">
           {% if comparable %}
-            <button class="ui small blue button" type="submit"><i class="exchange icon"></i> {% trans 'compare' %}</button>
+            <button class="ui small button" type="submit"><i class="exchange icon"></i> {% trans 'compare' %}</button>
           {% else %}
             <i>{% trans 'compare' %}</i>
           {% endif %}
         </th>
       {% endif %}
-      <th class="ui grey color"><i class="time icon"></i> {% trans 'Date/time' %}</th>
-      <th class="ui grey color"><i class="user icon"></i> {% trans 'Editor' %}</th>
-      <th class="ui grey color"><i class="comment icon"></i> {% trans 'Comment' %}</th>
     </tr>
   </thead>
   <tbody>
     {% for action in action_list %}
       <tr>
-        {% if compare_view %}
-          <td>
-            {% if comparable %}
-              <div class="ui radio checkbox">
-               <input type="radio" name="version_id1" value="{{ action.version.pk|unlocalize }}" {% if action.first %}style="visibility:hidden" {% endif %}{% if version1.pk|unlocalize == action.version.pk|unlocalize or action.second %}checked="checked"{% endif%}/>
-             </div>
-             <div class="ui radio checkbox">
-               <input type="radio" name="version_id2" value="{{ action.version.pk|unlocalize }}" {% if version2.pk|unlocalize == action.version.pk|unlocalize or action.first == 1 %}checked="checked"{% endif%}/>
-             </div>
-            {% else %}
-               <i>-</i>
-            {% endif %}
-          </td>
-        {% endif %}
-
-        <td>
-          {% if action.url %}
-            <a href="{{action.url}}">{{action.revision.date_created|date:_("DATETIME_FORMAT")}}</a>
-          {% else %}
-            {{action.revision.date_created|date:_("DATETIME_FORMAT")}}
-          {% endif %}
-        </td>
         <td>
         {% if action.revision.user %}
           <h4 class="ui image header">
             <img src="{{ action.revision.user.email|gravatar:'75' }}" class="ui mini rounded image">
-            <div class="content">{{ action.revision.user.username }}
+            <div class="content">
+              <a href="" class="ui link">{{ action.revision.user.username }}</a>
               <div class="sub header">Human Resources
               </div>
             </div>
@@ -55,6 +32,27 @@
         {% endif %}
         </td>
         <td>{{ action.revision.comment|default:"" }}</td>
+        <td class="ui grey color">
+          {% if action.url %}
+            <a href="{{action.url}}">{{action.revision.date_created|date:_("DATETIME_FORMAT")}}</a>
+          {% else %}
+            {{action.revision.date_created|date:_("DATETIME_FORMAT")}}
+          {% endif %}
+        </td>
+        {% if compare_view %}
+          <td class="right aligned">
+            {% if comparable %}
+              <div class="ui checkbox">
+               <input type="radio" name="version_id1" value="{{ action.version.pk|unlocalize }}" {% if action.first %}style="visibility:hidden" {% endif %}{% if version1.pk|unlocalize == action.version.pk|unlocalize or action.second %}checked="checked"{% endif%}/>
+             </div>
+             <div class="ui checkbox">
+               <input type="radio" name="version_id2" value="{{ action.version.pk|unlocalize }}" {% if version2.pk|unlocalize == action.version.pk|unlocalize or action.first == 1 %}checked="checked"{% endif%}/>
+             </div>
+            {% else %}
+               <i>-</i>
+            {% endif %}
+          </td>
+        {% endif %}
       </tr>
     {% endfor %}
   </tbody>

@@ -73,3 +73,25 @@ class Answer(TimeStampedModel):
     class Meta:
         verbose_name_plural = _('answers')
         ordering = ['-created']
+
+
+@python_2_unicode_compatible
+class AnswerSuggestedEdits(TimeStampedModel):
+    editor = models.ForeignKey(
+        User, related_name='suggested_edits_answer_editor')
+
+    answer = models.ForeignKey(
+        Question, related_name='suggested_edits_answer')
+
+    STATUS_CHOICES = (
+        ('approved', _('Approved')),
+        ('rejected', _('Rejected')),
+        ('pending', _('Pending'))
+    )
+    status = models.CharField(
+        _('Status'), max_length=20,
+        choices=STATUS_CHOICES, default='pending')
+
+    description = models.TextField(_('Description'))
+
+    comment = models.TextField(_('Revision Comment'))

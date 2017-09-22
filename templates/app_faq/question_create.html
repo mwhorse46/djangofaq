@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% load i18n staticfiles %}
 {% load common_tags martortags %}
-{% block title %}{% trans "Ask a Question" %} :: {{ block.super }}{% endblock %}
+{% block title %}
+  {% if question %}
+    {% blocktrans with title=question.title %}Edit Question "{{ title }}"{% endblocktrans %} :: {{ block.super }}
+  {% else %}
+    {% trans "Ask a Question" %} :: {{ block.super }}
+  {% endif %}
+{% endblock %}
 
 {% block css %}
   <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
@@ -13,12 +19,23 @@
 <div class="page content">
   <div class="repo ribbon ribbon-detail">
     <div class="ui container">
-      <div class="ui massive breadcrumb breadcrumb-title-detail">{% trans "Ask a Question" %}</div>
-      <div class="repo options">
-        <div class="ui small primary button">
-          Ask Question
+      {% if question %}
+        <div class="ui massive breadcrumb breadcrumb-title-detail">
+          {% blocktrans with title=question.title %}Edit Question "{{ title }}"{% endblocktrans %}
         </div>
-      </div>
+        <div class="repo options">
+          <a class="ui small button spf-link" href="{% url 'question_redirect' pk=question.pk %}">
+            {% trans "Back to Question" %}
+          </a>
+        </div>
+      {% else %}
+        <div class="ui massive breadcrumb breadcrumb-title-detail">{% trans "Ask a Question" %}</div>
+        <div class="repo options">
+          <a onclick="window.history.go(-1); return false;" class="ui small button spf-link">
+            {% trans "Go Back" %}
+          </a>
+        </div>
+      {% endif %}
     </div>
   </div>
   <div class="ui equal width vertically padded grid container">
@@ -55,11 +72,30 @@
               </div>
             {% endif %}
           </div>
+          {% if question %}
+            <div class="field">
+              <label>{% trans "Edit Summary" %} *</label>
+              <div class="ui left icon input">
+                <input type="text" name="revision_comment" id="id_revision_comment" minlength="5" maxlength="200" required
+                  placeholder="{% trans 'briefly explain your changes (corrected spelling, fixed grammar, improved formatting)' %}">
+                <i class="comment outline icon"></i>
+              </div>
+            </div>
+          {% endif %}
           <div class="field">
             <div class="ui clearing segment no-border post-action-segment">
-              <button class="ui right floated positive button post-answer-button" type="submit" disabled>
-                <i class="check icon"></i> {% trans "Post Your Answer" %}
-              </button>
+              {% if question %}
+                <button class="ui right floated blue button post-question-button" type="submit" disabled>
+                  <i class="check icon"></i> {% trans "Update Question" %}
+                </button>
+                <a href="{% url 'question_redirect' pk=question.pk %}" class="ui right floated button post-question-button">
+                  <i class="remove icon"></i> {% trans "Cancel" %}
+                </a>
+              {% else %}
+                <button class="ui right floated positive button post-question-button" type="submit" disabled>
+                  <i class="check icon"></i> {% trans "Update Question" %}{% trans "Post Your Question" %}
+                </button>
+              {% endif %}
             </div>
           </div>
         </form>
@@ -67,12 +103,37 @@
     </div>
     <div class="column right-sidebar">
       <div class="ui fluid right vertical">
-        <div class="sidebar-help sidebar-bulletin sidebar-help-title">
+        <div class="sidebar-help sidebar-bulletin sidebar-help-title" {% if question %}style="display:none"{% endif %}>
           <h3 class="ui header">{% trans "How to Ask" %}</h3>
           <p>Is your question about programming?</p>
           <p>We prefer questions that can be answered, not just discussed.</p>
           <p>Provide details. Share your research.</p>
           <p>If your question is about this website, <a>ask it on meta</a> instead.</p>
+        </div>
+        <div class="sidebar-help sidebar-bulletin sidebar-help-title-edit" {% if not question %}style="display:none"{% endif %}>
+          <h3 class="ui header">{% trans "How to Edit" %}</h3>
+          <div class="ui list">
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">fix grammatical or spelling errors</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">clarify meaning without changing it</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">correct minor mistakes</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content">add related resources or links</div>
+            </div>
+            <div class="item no-underline">
+              <i class="caret right icon"></i>
+              <div class="content"><i>always</i> respect the original author</div>
+            </div>
+          </div>
         </div>
         <div class="sidebar-help sidebar-bulletin sidebar-help-description" style="display:none">
           <h3 class="ui header">{% trans "How to Format" %}</h3>
@@ -177,13 +238,13 @@
         text         : 'title',
         value        : 'id'
       },
-    });
+    }).dropdown('restore defaults');
 
     var disabledPostButton = function() {
       if($('textarea[name=description]').val().length >= 10) {
-        $('.post-answer-button').removeAttr('disabled');
+        $('.post-question-button').removeAttr('disabled');
       }else {
-        $('.post-answer-button').attr({'disabled': 'disabled'});
+        $('.post-question-button').attr({'disabled': 'disabled'});
       }
     }
     disabledPostButton();
@@ -197,7 +258,11 @@
       showHelp('.sidebar-help-description');
     });
     $('#id_title').click(function(){
-      showHelp('.sidebar-help-title');
+      {% if question %}{# edit mode #}
+        showHelp('.sidebar-help-title-edit');
+      {% else %}{# create mode #}
+        showHelp('.sidebar-help-title');
+      {% endif %}
     });
     $('.tags-dropdown').click(function(){
       showHelp('.sidebar-help-tags');

@@ -99,10 +99,51 @@ class Question(TimeStampedModel):
         return unique_slug
 
     def save(self, *args, **kwargs):
-        if not self.slug:
+        if self.slug:  # edit
+            if slugify(self.title) != self.slug:
+                self.slug = self._unique_slug()
+        else:  # create
             self.slug = self._unique_slug()
         super(Question, self).save(*args, **kwargs)
+
+    def edits_object(self):
+        question = self
+        qs = QuestionSuggestedEdits.objects.filter(question=question)
+        if qs.exists():
+            return qs.first()
+        return question
 
     class Meta:
         verbose_name_plural = _('questions')
         ordering = ['-created']
+
+
+@python_2_unicode_compatible
+class QuestionSuggestedEdits(TimeStampedModel):
+    question = models.ForeignKey(
+        Question, related_name='suggested_edits_question')
+
+    editor = models.ForeignKey(
+        User, related_name='suggested_edits_editor')
+
+    title = models.CharField(
+        _('Title'), max_length=200)
+
+    slug = models.SlugField(
+        _('Slug'), max_length=200, unique=True)
+
+    tags = models.ManyToManyField(
+        Tag, related_name='suggested_edits_tags')
+
+    STATUS_CHOICES = (
+        ('approved', _('Approved')),
+        ('rejected', _('Rejected')),
+        ('pending', _('Pending'))
+    )
+    status = models.CharField(
+        _('Status'), max_length=20,
+        choices=STATUS_CHOICES, default='pending')
+
+    description = models.TextField(_('Description'))
+
+    comment = models.TextField(_('Revision Comment'))

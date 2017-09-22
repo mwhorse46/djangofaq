@@ -1,3 +1,14 @@
 {% load i18n %}
-{% if prev_url %}<li><a href="{{ prev_url }}">&lsaquo; {% trans "previous" %}</a></li>{% endif %}
-{% if next_url %}<li><a href="{{ next_url }}">{% trans "next" %} &rsaquo;</a></li>{% endif %}
+<div class="ui paginations">
+  {% if prev_url %}
+    <div class="ui small pagination menu">
+      <a class="item spf-link" href="{{ prev_url }}"><i class="arrow left icon"></i> {% trans "previous" %}</a>
+    </div>
+  {% endif %}
+
+  {% if next_url %}
+    <div class="ui right floated small pagination menu">
+      <a class="item spf-link" href="{{ next_url }}">{% trans "next" %}&nbsp;<i class="arrow right icon"></i></a>
+    </div>
+  {% endif %}
+</div><!-- end  /.paginations -->
