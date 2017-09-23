@@ -22,6 +22,9 @@
 .ui.grey.color {
   color: #767676!important;
 }
+.top-align {
+  vertical-align: top!important;
+}
 .hover-opacity {
   opacity: .2!important;
 }

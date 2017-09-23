@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load staticfiles %}
+
+<tr class="no-border">
+  <td colspan="3">
+    <form class="ui form comment-form" method="post">
+      {% csrf_token %}
+      <div class="ui two fields">
+        <div class="ten wide field">
+          {{ form.comment }}
+          {% if form.comment.errors %}
+            <div class="ui pointing red basic label">
+              {% for error in form.comment.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="field">
+          <div class="ui yellow small message message-bulletin comment-help">
+            {% trans "Comment use mini-Markdown formatting:" %} <code>[link](http://example.com) _italic_ **bold** `code`</code>.
+            {% blocktrans %}The comment author will always be notified of your replied comment. To also notify a previous commenter, mention their user name:{% endblocktrans %} <code>@[username]</code>.
+            <a href="http://commonmark.org/help/" target="_blank">{% trans "Learn more..." %}</a>
+          </div>
+          <button type="submit" class="ui green labeled submit icon button">
+          <i class="plus icon"></i> {% trans "Post Comment" %}
+        </button>
+        </div>
+      </div>
+    </form>
+  </td>
+</tr>

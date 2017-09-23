@@ -15,11 +15,8 @@ from app_faq.models.content_type import ContentTypeToGetModel
 
 @python_2_unicode_compatible
 class Comment(TimeStampedModel, ContentTypeToGetModel):
-    sender = models.ForeignKey(
-        User, related_name='comment_sender')
-
-    receiver = models.ForeignKey(
-        User, related_name='comment_receiver')
+    author = models.ForeignKey(
+        User, related_name='comment_author')
 
     content_type = models.ForeignKey(
         ContentType, related_name='comments',
@@ -35,10 +32,6 @@ class Comment(TimeStampedModel, ContentTypeToGetModel):
 
     edited = models.BooleanField(
         _('Edited?'), default=False)
-
-    editor = models.ForeignKey(
-        User, blank=True, null=True,
-        on_delete=models.SET_NULL, related_name='comment_editor')
 
     def __str__(self):
         return '%s' % self.get_related_object()

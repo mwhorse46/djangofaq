@@ -3,10 +3,12 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 from app_faq.views.question import *
+from app_faq.views.comment import *
 from app_faq.views.answer import *
 from app_faq.views.tag import *
 
 urlpatterns = [
+    # question urls
     url(
         r'^$',
         QuestionHomePage.as_view(),
@@ -42,11 +44,32 @@ urlpatterns = [
         QuestionReversions.as_view(),
         name='question_reversions'
     ),
+
+    # answer urls
     url(
         r'^answer/(?P<question_id>[\d-]+)/create/$',
         AnswerFormView.as_view(),
         name='answer_create'
     ),
+
+    # comment urls
+    url(
+        r'^comments/create/question/(?P<pk>[\d-]+)/$',
+        CommentQuestionFormView.as_view(),
+        name='comment_question_create'
+    ),
+    url(
+        r'^comments/create/answer/(?P<pk>[\d-]+)/$',
+        CommentAnswerFormView.as_view(),
+        name='comment_answer_create'
+    ),
+    url(
+        r'^comments/offset/(?P<model_name>[\w\-]+)/(?P<object_id>[\d-]+)/$',
+        CommentsOffsetView.as_view(),
+        name='comments_offset'
+    ),
+
+    # tag urls
     url(
         r'^tags/$',
         TagListView.as_view(),

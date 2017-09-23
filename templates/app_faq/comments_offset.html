@@ -1,0 +1,14 @@
+{% load martortags %}
+
+{% for comment in comments_offset %}
+  <tr>
+    <td class="ui grey color top-align">18</td>
+    <td class="top-align">
+      <i class="arrow up grey link icon hover-opacity"></i><br>
+      <i class="flag grey link icon hover-opacity"></i>
+    </td>
+    <td>
+      {{ comment.comment|safe_markdown }} <a>{{ comment.author }}</a> <date class="ui grey color">{{ comment.created }}</date>
+    </td>
+  </tr>
+{% endfor %}
