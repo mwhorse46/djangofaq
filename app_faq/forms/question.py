@@ -5,7 +5,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from martor.widgets import AdminMartorWidget
-from app_faq.models.question import Question
+from app_faq.models.question import Question, QuestionSuggestedEdits
 
 
 class QuestionForm(forms.ModelForm):
@@ -22,3 +22,15 @@ class QuestionForm(forms.ModelForm):
 # def __init__(self, *args, **kwargs):
 #    super(QuestionForm, self).__init__(*args, **kwargs)
 #    self.fields['tags'].widget.attrs = {'class': 'ui search fluid dropdown tags-dropdown'}
+
+
+class QuestionSuggestedEditsForm(forms.ModelForm):
+
+    class Meta:
+        model = QuestionSuggestedEdits
+        fields = ['title', 'description', 'tags', 'comment']
+        widgets = {
+            'tags': forms.SelectMultiple(attrs={'class': 'ui search fluid dropdown tags-dropdown'}),
+            'title': forms.TextInput(attrs={'placeholder': _("What's your programming question? Be specific.")}),
+            'description': AdminMartorWidget()
+        }

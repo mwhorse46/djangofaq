@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n staticfiles %}
+{% load common_tags %}
+{% block title %}{% trans "Revision for" %} {{ question.title }} :: {{ block.super }}{% endblock %}
+
+{% block css %}
+  <style type="text/css">
+  /* minimal style for the diffs */
+  del, ins {
+  color: #000;
+  text-decoration: none;
+  }
+  del {text-decoration: line-through;color: #A82400;background-color: #E5BDB2}
+  ins {background: #D1E1AD;color: #405A04}
+  sup.follow { color: #5555ff; }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="page content">
+    <div class="repo ribbon ribbon-detail">
+      <div class="ui container">
+        <div class="ui massive breadcrumb breadcrumb-title-detail">{% trans "Revision for" %} "{{ question.title }}"</div>
+        <div class="repo options">
+          <a class="ui small button spf-link" href="{% url 'question_redirect' pk=question.pk %}">
+            {% trans "Return to Question" %}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ui container">
+      {% include "reversion-compare/question/action_list_partial.html"  %}
+      {% if request.GET.version_id1 %}
+        {% include "reversion-compare/question/compare_partial.html"  %}
+        {% include "reversion-compare/question/compare_links_partial.html"  %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script></script>
+{% endblock %}

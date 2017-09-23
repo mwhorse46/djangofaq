@@ -33,6 +33,11 @@ urlpatterns = [
         name='question_edit'
     ),
     url(
+        r'^question/suggestion/edit/(?P<pk>[\d-]+)/$',
+        QuestionSuggestedEditsCreate.as_view(),
+        name='question_suggested_edits_create'
+    ),
+    url(
         r'^question/reversions/(?P<pk>[\d-]+)/$',
         QuestionReversions.as_view(),
         name='question_reversions'

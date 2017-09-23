@@ -66,40 +66,51 @@
                     <tr>
                       <td class="ui grey color no-border sef-actions">
                         <span class="ui link grey color share-action">share</span>
-                        <a href="{% url 'question_edit' pk=question.pk %}" class="ui link grey color spf-link edit-action">{% trans "edit" %}</a>
+                        <a href="{% url 'question_suggested_edits_create' pk=question.pk %}" class="ui link grey color spf-link edit-action">{% trans "edit" %}</a>
                         <span class="ui link grey color flag-action">flag</span>
+                        {% if question.author == request.user %}
+                        <span class="ui link grey color delete-action">delete</span>
+                        {% endif %}
                       </td>
 
-                      {% if question.editor %}
-                        <td class="no-border user-info user-signature">
-                          <div class="ui comments">
+                      {% if question.edited %}
+                        {% if question.editor == question.author %}
+                          <td class="no-border user-info user-signature" style="vertical-align: top">
                             <a href="{% url 'question_reversions' pk=question.pk %}" class="ui link no-underline spf-link user-action-time" title="{{ question.modified }}">
                               {% blocktrans with time=question.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
                             </a>
-                            <div class="comment user-info-signature">
-                              <a class="avatar spf-link" href="{% url 'user_profile' pk=question.editor.pk username=question.editor.username %}">
-                                <img src="{{ question.editor.email|gravatar:'75' }}">
+                          </td>
+                        {% else %}
+                          <td class="no-border user-info user-signature">
+                            <div class="ui comments">
+                              <a href="{% url 'question_reversions' pk=question.pk %}" class="ui link no-underline spf-link user-action-time" title="{{ question.modified }}">
+                                {% blocktrans with time=question.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
                               </a>
-                              <div class="content">
-                                <a class="author spf-link" href="{% url 'user_profile' pk=question.editor.pk username=question.editor.username %}">{{ question.editor }}</a>
-                                <div class="text">
-                                  <span class="reputation">
-                                    <i class="diamond orange icon"></i> <b>269K</b>
-                                  </span>
-                                  <span class="gold-badge">
-                                    <i class="circle small yellow icon icon-dot-badge"></i> 12
-                                  </span>
-                                  <span class="silver-badge">
-                                    <i class="circle small grey icon icon-dot-badge"></i> 38
-                                  </span>
-                                  <span class="bronze-badge">
-                                    <i class="circle small brown icon icon-dot-badge"></i> 93
-                                  </span>
+                              <div class="comment user-info-signature">
+                                <a class="avatar spf-link" href="{% url 'user_profile' pk=question.editor.pk username=question.editor.username %}">
+                                  <img src="{{ question.editor.email|gravatar:'75' }}">
+                                </a>
+                                <div class="content">
+                                  <a class="author spf-link" href="{% url 'user_profile' pk=question.editor.pk username=question.editor.username %}">{{ question.editor }}</a>
+                                  <div class="text">
+                                    <span class="reputation">
+                                      <i class="diamond orange icon"></i> <b>269K</b>
+                                    </span>
+                                    <span class="gold-badge">
+                                      <i class="circle small yellow icon icon-dot-badge"></i> 12
+                                    </span>
+                                    <span class="silver-badge">
+                                      <i class="circle small grey icon icon-dot-badge"></i> 38
+                                    </span>
+                                    <span class="bronze-badge">
+                                      <i class="circle small brown icon icon-dot-badge"></i> 93
+                                    </span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </td>
+                          </td>
+                        {% endif %}
                       {% endif %}
 
                       <td class="no-border user-info user-signature">

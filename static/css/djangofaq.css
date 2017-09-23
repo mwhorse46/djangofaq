@@ -37,6 +37,14 @@
 .margin-2-0 {
   margin: 2em 0!important;
 }
+pre.highlight {
+  background-color: #fffaf3;
+  padding: 0.5em;
+  counter-reset: line;
+  counter-increment: line;
+  white-space: pre-wrap;
+  font-size: 12px;
+}
 .ui.blue.header {
   color: #4183C4!important;
   text-decoration: none;

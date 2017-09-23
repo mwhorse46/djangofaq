@@ -20,7 +20,7 @@ def highlight_diff(diff_text):
     """
     Simple highlight a diff text in the way pygments do it ;)
     """
-    html = ['<pre class="revision-block">']
+    html = ['<pre class="highlight revision-block">']
     for line in diff_text.splitlines():
         line = escape(line)
         if line.startswith("+"):
@@ -56,6 +56,9 @@ def html_diff_custom(value1, value2, cleanup=SEMANTIC):
             dmp.diff_cleanupEfficiency(diff)
         elif cleanup is not None:
             raise ValueError("cleanup parameter should be one of SEMANTIC, EFFICIENCY or None.")
+        print(dmp.diff_text1(diff))
+        print('--------------------')
+        print(dmp.diff_text2(diff))
         html = dmp.diff_prettyHtml(diff)
         html = html.replace("&para;<br>", "</br>")  # IMHO mark paragraphs are needlessly
     else:

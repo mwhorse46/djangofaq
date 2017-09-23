@@ -9,3 +9,7 @@ from reversion_compare.admin import CompareVersionAdmin
 class AnswerAdmin(CompareVersionAdmin):
     #list_display = ['title', 'creator']
     pass
+
+
+class AnswerSuggestedEditsAdmin(CompareVersionAdmin):
+    pass

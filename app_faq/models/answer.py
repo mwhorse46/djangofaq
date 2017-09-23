@@ -70,6 +70,13 @@ class Answer(TimeStampedModel):
         _title = _('%(author)s comment on %(question)s')
         return _title % {'author': self.author, 'question': self.question}
 
+    def edits_object(self):
+        answer = self
+        qs = AnswerSuggestedEdits.objects.filter(answer=answer)
+        if qs.exists():
+            return qs.first()
+        return answer
+
     class Meta:
         verbose_name_plural = _('answers')
         ordering = ['-created']
@@ -95,3 +102,7 @@ class AnswerSuggestedEdits(TimeStampedModel):
     description = models.TextField(_('Description'))
 
     comment = models.TextField(_('Revision Comment'))
+
+    class Meta:
+        verbose_name_plural = _('answer suggested edits')
+        ordering = ['-created']

@@ -129,9 +129,6 @@ class QuestionSuggestedEdits(TimeStampedModel):
     title = models.CharField(
         _('Title'), max_length=200)
 
-    slug = models.SlugField(
-        _('Slug'), max_length=200, unique=True)
-
     tags = models.ManyToManyField(
         Tag, related_name='suggested_edits_tags')
 
@@ -147,3 +144,11 @@ class QuestionSuggestedEdits(TimeStampedModel):
     description = models.TextField(_('Description'))
 
     comment = models.TextField(_('Revision Comment'))
+
+    @property
+    def slug(self):
+        return slugify(self.title)
+
+    class Meta:
+        verbose_name_plural = _('question suggested edits')
+        ordering = ['-created']

@@ -17,13 +17,13 @@ from reversion.views import RevisionMixin
 from reversion_compare.views import HistoryCompareDetailView
 from reversion import set_comment as reversion_set_comment
 
-#from app_faq.utils.revision import html_diff_custom
+from app_faq.utils.revision import html_diff_custom
 
 from app_faq.utils.paginator import GenericPaginator
-from app_faq.models.question import Question
+from app_faq.models.question import Question, QuestionSuggestedEdits
 from app_faq.models.tag import Tag
 from app_faq.forms.answer import AnswerForm
-from app_faq.forms.question import QuestionForm
+from app_faq.forms.question import QuestionForm, QuestionSuggestedEditsForm
 
 
 class QuestionHomePage(ListView):
@@ -89,7 +89,7 @@ class QuestionEdit(LoginRequiredMixin, RevisionMixin, FormView):
     model = Question
 
     def post(self, request, **kwargs):
-        comment = request.POST.get('revision_comment', '')
+        comment = request.POST.get('comment', '')
         reversion_set_comment(comment)
         return super(QuestionEdit, self).post(request, **kwargs)
 
@@ -114,6 +114,48 @@ class QuestionEdit(LoginRequiredMixin, RevisionMixin, FormView):
         return context
 
 
+class QuestionSuggestedEditsCreate(LoginRequiredMixin, RevisionMixin, FormView):
+    template_name = 'app_faq/question_suggested_edits_create.html'
+    form_class = QuestionSuggestedEditsForm
+    model = QuestionSuggestedEdits
+
+    def get_object(self):
+        return get_object_or_404(Question, pk=self.kwargs['pk'])
+
+    def form_valid(self, form):
+        initial = form.save(commit=False)
+        initial.question = self.get_object()
+        initial.editor = self.request.user
+        initial.save()
+        form.save_m2m()
+
+        # updating the last editor
+        question = self.get_object()
+        question.editor = self.request.user
+        question.edited = True
+        question.save()
+
+        messages.success(self.request, _('Edit suggestion successfully created!'))
+        return redirect(reverse('question_redirect', kwargs={'pk': self.get_object().pk}))
+
+    def get_initial(self):
+        initial = super(QuestionSuggestedEditsCreate, self).get_initial()
+        for field, _cls in self.form_class.base_fields.items():
+            if field == 'tags':
+                value = self.get_object().tags.all()
+            elif field == 'comment':
+                value = ''
+            else:
+                value = getattr(self.get_object(), field)
+            initial.update({field: value})
+        return initial
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionSuggestedEditsCreate, self).get_context_data(**kwargs)
+        context['question'] = self.get_object()
+        return context
+
+
 """
 class QuestionReversions(ListView):
     template_name = 'app_faq/question_revisions.html'
@@ -134,7 +176,7 @@ class QuestionReversions(ListView):
 
 
 class QuestionReversions(HistoryCompareDetailView):
-    template_name = 'app_faq/question_revisions.html'
+    template_name = 'app_faq/question_revisions_old.html'
     context_object_name = 'question'
     model = Question
     compare_exclude = ('modified', 'author')
