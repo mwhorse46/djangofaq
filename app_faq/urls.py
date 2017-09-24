@@ -44,6 +44,11 @@ urlpatterns = [
         QuestionReversions.as_view(),
         name='question_reversions'
     ),
+    # url(
+    #    r'^question/reversions/(?P<pk>[\d-]+)/$',
+    #    QuestionSuggestedEditsReversions.as_view(),
+    #    name='question_reversions'
+    # ),
 
     # answer urls
     url(

@@ -182,27 +182,27 @@
             </div>
           </div><!-- end /.item-question -->
 
-          {% if question.answer_question.approved %}
-            <div class="ui tabular menu">
+          {% if answers_question %}
+            <div class="ui tabular menu" id="tab-answer">
               <div class="ui container">
                 <h3 class="left floated header item">
-                  {{ question.answer_question.approved.count }}
-                  {% if question.answer_question.approved.count <= 1 %}{% trans "Answer" %}{% else %}{% trans "Answers" %}{% endif %}
+                  {{ answers_question.count }}
+                  {% if answers_question.count <= 1 %}{% trans "Answer" %}{% else %}{% trans "Answers" %}{% endif %}
                 </h3>
-                <a class="active item">
+                <a class="{% if request.GET.order != 'oldest' and request.GET.order != 'votes' %}active{% endif %} item" href="?order=active#tab-answer">
                   <i class="wait icon"></i> {% trans "active" %}
                 </a>
-                <a class="item">
+                <a class="{% if request.GET.order == 'oldest' %}active{% endif %} item" href="?order=oldest#tab-answer">
                   <i class="history icon"></i> {% trans "oldest" %}
                 </a>
-                <a class="item">
+                <a class="{% if request.GET.order == 'votes' %}active{% endif %} item" href="?order=votes#tab-answer">
                   <i class="heart icon"></i> {% trans "votes" %}
                 </a>
               </div>
             </div>
-          {% endif %}{# question.answer_question.approved #}
+          {% endif %}{# answers_question #}
 
-          {% for answer in question.answer_question.approved %}
+          {% for answer in answers_question %}
             <div class="item item-answers no-border">
               <div class="stats">
                 <div class="vote-up stats-inside-detail">
@@ -313,7 +313,7 @@
                       <tr class="comment-actions">
                         <td colspan="3" style="padding:10px;">
                           <span class="ui blue color link add-a-comment" data-target="answer:{{ question.id }}">add a comment</span>
-                          {% if question.has_offset_comments %}
+                          {% if answer.has_offset_comments %}
                             <span class="ui blue color link show-more-comments" data-target="answer:{{ answer.id }}">
                               <span class="ui grey color">|</span> show <b>{{ answer.get_comments_offset.count }}</b> more comments
                             </span>
@@ -325,7 +325,7 @@
                 </div>
               </div>
             </div><!-- end /.item-answers -->
-          {% endfor %}{# question.answer_question.approved #}
+          {% endfor %}{# answers_question #}
 
           <div class="ui divider"></div>
 

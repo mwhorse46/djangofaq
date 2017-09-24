@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
 from django.utils.text import slugify
 
 from updown.fields import RatingField
@@ -119,7 +120,7 @@ class Question(TimeStampedModel):
         """ return all comments contains with this question """
         comments = Comment.objects.filter(object_id=self.pk,
                                           content_type__model=self._meta.model_name)
-        return comments.order_by('rating_likes', 'created')
+        return comments.order_by('created')  # 'rating_likes'
 
     def get_comments_limit(self):
         """ return maximum show the comments """
@@ -134,6 +135,10 @@ class Question(TimeStampedModel):
     def has_offset_comments(self):
         """ to check the question has a offset comments or not """
         return self.get_comments_offset().exists()
+
+    @models.permalink
+    def get_absolute_url(self):
+        return reverse('question_detail', kwargs={'pk': self.pk, 'slug': self.slug})
 
     class Meta:
         verbose_name_plural = _('questions')

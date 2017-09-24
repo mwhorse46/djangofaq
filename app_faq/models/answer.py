@@ -83,7 +83,7 @@ class Answer(TimeStampedModel):
         """ return all comments contains with this answer """
         comments = Comment.objects.filter(object_id=self.pk,
                                           content_type__model=self._meta.model_name)
-        return comments.order_by('rating_likes', 'created')
+        return comments.order_by('created')  # 'rating_likes'
 
     def get_comments_limit(self):
         """ return maximum show the comments """
