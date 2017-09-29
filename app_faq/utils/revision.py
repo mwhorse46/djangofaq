@@ -56,9 +56,6 @@ def html_diff_custom(value1, value2, cleanup=SEMANTIC):
             dmp.diff_cleanupEfficiency(diff)
         elif cleanup is not None:
             raise ValueError("cleanup parameter should be one of SEMANTIC, EFFICIENCY or None.")
-        print(dmp.diff_text1(diff))
-        print('--------------------')
-        print(dmp.diff_text2(diff))
         html = dmp.diff_prettyHtml(diff)
         html = html.replace("&para;<br>", "</br>")  # IMHO mark paragraphs are needlessly
     else:
@@ -67,7 +64,7 @@ def html_diff_custom(value1, value2, cleanup=SEMANTIC):
         value2 = value2.splitlines()
 
         if len(value1) > LINE_COUNT_4_UNIFIED_DIFF or len(value2) > LINE_COUNT_4_UNIFIED_DIFF:
-            diff = unified_diff(value1, value2, n=2)
+            diff = difflib.unified_diff(value1, value2, n=2)
         else:
             diff = difflib.ndiff(value1, value2)
 

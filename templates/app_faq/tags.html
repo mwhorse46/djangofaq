@@ -16,13 +16,13 @@
               <input type="text" name="find-tags" placeholder="{% trans 'Type to find tags' %}">
             </div>
           </form>
-          <a class="active item">
-            <i class="flame icon"></i> popular
+          <a class="{% if request.GET.order != 'name' and request.GET.order != 'new' %}active{% endif %} item spf-link" href="?order=popular">
+            <i class="lightning icon"></i> popular
           </a>
-          <a class="item">
+          <a class="{% if request.GET.order == 'name' %}active{% endif %} item spf-link" href="?order=name">
             <i class="list ordered icon"></i> name
           </a>
-          <a class="item">
+          <a class="{% if request.GET.order == 'new' %}active{% endif %} item spf-link" href="?order=new">
             <i class="rss icon"></i> new
           </a>
         </div>

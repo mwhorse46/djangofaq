@@ -51,6 +51,11 @@
               </div>
             </div>
             <div class="content">
+              {% if question.edited and question.editor != request.user %}
+                <div class="ui center aligned segment message message-bulletin no-radius">
+                  You have <a>suggested edits from {{ question.edits_object.editor }}</a>
+                </div>
+              {% endif %}
               <div class="description martor-preview content-description-detail">
                 {{ question.description|safe_markdown }}
               </div>
@@ -73,17 +78,17 @@
                         {% endif %}
                       </td>
 
-                      {% if question.edited %}
+                      {% if question.edited and question.edits_object is not None %}
                         {% if question.editor == question.author %}
                           <td class="no-border top-align user-info user-signature">
-                            <a href="{% url 'question_reversions' pk=question.pk %}" class="ui link no-underline spf-link user-action-time" title="{{ question.modified }}">
+                            <a href="{% url 'question_reversions' pk=question.edits_object.pk %}" class="ui link no-underline spf-link user-action-time" title="{{ question.modified }}">
                               {% blocktrans with time=question.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
                             </a>
                           </td>
                         {% else %}
                           <td class="no-border user-info user-signature">
                             <div class="ui comments">
-                              <a href="{% url 'question_reversions' pk=question.pk %}" class="ui link no-underline spf-link user-action-time" title="{{ question.modified }}">
+                              <a href="{% url 'question_reversions' pk=question.edits_object.pk %}" class="ui link no-underline spf-link user-action-time" title="{{ question.modified }}">
                                 {% blocktrans with time=question.modified|timesince %}edited {{ time }} ago{% endblocktrans %}
                               </a>
                               <div class="comment user-info-signature">
@@ -151,7 +156,7 @@
                 <table class="ui table no-border table-comments table-question-comments" data-target="question:{{ question.id }}">
                   <tbody>
                     {% for comment in question.get_comments_limit %}
-                      <tr>
+                      <tr id="question-comment-{{ question.id }}">
                         <td class="ui grey color top-align">18</td>
                         <td class="top-align">
                           <i class="arrow up grey link icon hover-opacity"></i><br />
@@ -163,10 +168,16 @@
                     {% endfor %}
                     <tr class="comment-actions">
                       <td colspan="3" style="padding:10px;">
-                        <span class="ui blue color link add-a-comment" data-target="question:{{ question.id }}">add a comment</span>
+                        {% if request.user.is_authenticated %}
+                          <span class="ui blue color link add-a-comment" data-target="question:{{ question.id }}">add a comment</span>
+                          {% if question.has_offset_comments %}
+                            <span class="ui grey color vertical-line">|</span>
+                          {% endif %}
+                        {% endif %}
+
                         {% if question.has_offset_comments %}
                           <span class="ui blue color link show-more-comments" data-target="question:{{ question.id }}">
-                            <span class="ui grey color">|</span> show <b>{{ question.get_comments_offset.count }}</b> more comments
+                            show <b>{{ question.get_comments_offset.count }}</b> more comments
                           </span>
                         {% endif %}
                       </td>
@@ -300,7 +311,7 @@
                   <table class="ui table no-border table-comments table-answer-comments" data-target="answer:{{ answer.id }}">
                     <tbody>
                       {% for comment in answer.get_comments_limit %}
-                        <tr>
+                        <tr id="answer-comment-{{ question.id }}">
                           <td class="ui grey color top-align">18</td>
                           <td class="top-align">
                             <i class="arrow up grey link icon hover-opacity"></i><br />
@@ -312,10 +323,16 @@
                       {% endfor %}
                       <tr class="comment-actions">
                         <td colspan="3" style="padding:10px;">
-                          <span class="ui blue color link add-a-comment" data-target="answer:{{ question.id }}">add a comment</span>
+                          {% if request.user.is_authenticated %}
+                            <span class="ui blue color link add-a-comment" data-target="answer:{{ question.id }}">add a comment</span>
+                            {% if answer.has_offset_comments %}
+                              <span class="ui grey color vertical-line">|</span>
+                            {% endif %}
+                          {% endif %}
+
                           {% if answer.has_offset_comments %}
                             <span class="ui blue color link show-more-comments" data-target="answer:{{ answer.id }}">
-                              <span class="ui grey color">|</span> show <b>{{ answer.get_comments_offset.count }}</b> more comments
+                              show <b>{{ answer.get_comments_offset.count }}</b> more comments
                             </span>
                           {% endif %}
                         </td>

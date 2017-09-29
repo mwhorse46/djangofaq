@@ -96,37 +96,6 @@ class QuestionCreate(LoginRequiredMixin, FormView):
         return redirect(reverse('question_redirect', kwargs={'pk': initial.pk}))
 
 
-class QuestionEdit(LoginRequiredMixin, RevisionMixin, FormView):
-    template_name = 'app_faq/question_edit.html'
-    form_class = QuestionForm
-    model = Question
-
-    def post(self, request, **kwargs):
-        comment = request.POST.get('comment', '')
-        reversion_set_comment(comment)
-        return super(QuestionEdit, self).post(request, **kwargs)
-
-    def get_object(self):
-        return get_object_or_404(Question, pk=self.kwargs['pk'])
-
-    def get_form(self):
-        return self.form_class(instance=self.get_object(), **self.get_form_kwargs())
-
-    def form_valid(self, form):
-        initial = form.save(commit=False)
-        initial.editor = self.request.user
-        initial.edited = True
-        initial.save()
-        form.save_m2m()
-        messages.info(self.request, _('Question successfully updated!'))
-        return redirect(reverse('question_redirect', kwargs={'pk': initial.pk}))
-
-    def get_context_data(self, **kwargs):
-        context = super(QuestionEdit, self).get_context_data(**kwargs)
-        context['question'] = self.get_object()
-        return context
-
-
 class QuestionSuggestedEditsCreate(LoginRequiredMixin, RevisionMixin, FormView):
     template_name = 'app_faq/question_suggested_edits_create.html'
     form_class = QuestionSuggestedEditsForm
@@ -136,17 +105,22 @@ class QuestionSuggestedEditsCreate(LoginRequiredMixin, RevisionMixin, FormView):
         return get_object_or_404(Question, pk=self.kwargs['pk'])
 
     def form_valid(self, form):
-        initial = form.save(commit=False)
-        initial.question = self.get_object()
-        initial.editor = self.request.user
-        initial.save()
-        form.save_m2m()
-
         # updating the last editor
         question = self.get_object()
         question.editor = self.request.user
         question.edited = True
         question.save()
+
+        initial = form.save(commit=False)
+        initial.question = question
+        initial.editor = self.request.user
+
+        # automate status=approved if it is owned.
+        if question.author == question.editor:
+            initial.status == 'approved'
+
+        initial.save()
+        form.save_m2m()
 
         messages.success(self.request, _('Edit suggestion successfully created!'))
         return redirect(reverse('question_redirect', kwargs={'pk': self.get_object().pk}))
@@ -169,73 +143,14 @@ class QuestionSuggestedEditsCreate(LoginRequiredMixin, RevisionMixin, FormView):
         return context
 
 
-"""
-class QuestionReversions(ListView):
-    template_name = 'app_faq/question_revisions.html'
-    context_object_name = 'reversions'
-    model = Version
-
-    def get_question(self):
-        return get_object_or_404(Question, pk=self.kwargs['pk'])
-
-    def get_queryset(self):
-        return self.model.objects.get_for_object(self.get_question())
-
-    def get_context_data(self, **kwargs):
-        context = super(QuestionReversions, self).get_context_data(**kwargs)
-        context['question'] = self.get_question()
-        return context
-"""
-
-
-class QuestionReversions(HistoryCompareDetailView):
-    template_name = 'app_faq/question_revisions_old.html'
-    context_object_name = 'question'
-    model = Question
-    compare_exclude = ('modified', 'author')
-
-    """
-    def fallback_compare(self, obj_compare):
-        value1, value2 = obj_compare.to_string()
-        html = html_diff_custom(value1, value2)
-        return html
-
-    def generic_add_remove(self, raw_value1, raw_value2, value1, value2):
-        if raw_value1 is None:
-            context = {"value": value2}
-            return render_to_string("reversion-compare/compare_generic_add.html", context)
-        elif raw_value2 is None:
-            context = {"value": value1}
-            return render_to_string("reversion-compare/compare_generic_remove.html", context)
-        else:
-            html = html_diff_custom(value1, value2)
-            return html
-
-    def compare_ForeignKey(self, obj_compare):
-        related1, related2 = obj_compare.get_related()
-        value1, value2 = force_text(related1), force_text(related2)
-        return self.generic_add_remove(related1, related2, value1, value2)
-    """
-
-    def compare_ManyToOneRel(self, obj_compare):
-        change_info = obj_compare.get_m2o_change_info()
-        context = {'change_info': change_info}
-        return render_to_string('reversion-compare/question/compare_generic_many_to_many.html', context)
-
-    def compare_ManyToManyField(self, obj_compare):
-        change_info = obj_compare.get_m2m_change_info()
-        context = {'change_info': change_info}
-        return render_to_string('reversion-compare/question/compare_generic_many_to_many.html', context)
-
-
 class QuestionSuggestedEditsReversions(HistoryCompareDetailView):
     template_name = 'app_faq/question_revisions.html'
-    context_object_name = 'question'
+    context_object_name = 'question_suggested_edits'
     model = QuestionSuggestedEdits
-    compare_exclude = ('created', 'modified', 'author')
+    compare_fields = ('description', )
 
     def get_object(self):
-        return get_object_or_404(self.model, question__pk=self.kwargs['pk'])
+        return get_object_or_404(self.model, pk=self.kwargs['pk'])
 
     def compare_ManyToOneRel(self, obj_compare):
         change_info = obj_compare.get_m2o_change_info()

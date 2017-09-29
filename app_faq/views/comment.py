@@ -28,8 +28,8 @@ class CommentFormView(LoginRequiredMixin, FormView):
         if self.model_target is None:
             return JsonResponse({'status': False})
 
-        content_type = ContentType.objects.get(
-            model=self.model_target._meta.model_name)
+        model_name = self.model_target._meta.model_name
+        content_type = ContentType.objects.get(model=model_name)
 
         initial = form.save(commit=False)
         initial.author = self.request.user
@@ -46,6 +46,8 @@ class CommentFormView(LoginRequiredMixin, FormView):
             'edited': initial.edited,
             'id': initial.id
         }
+        # id="question-comment-{{ question.id }}"
+        # id="answer-comment-{{ question.id }}"
         return JsonResponse(context)
 
 

@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.views.generic import (ListView, DetailView, TemplateView)
-from django.db.models import Q
+from django.db.models.functions import Lower as LowerCase
+from django.db.models import (Q, Count)
 
 from app_faq.utils.json import JSONResponseMixin
 from app_faq.utils.paginator import GenericPaginator
@@ -17,7 +18,16 @@ class TagListView(ListView):
     template_name = 'app_faq/tags.html'
 
     def get_queryset(self):
-        return self.model.objects.order_by('-created')
+        order = self.request.GET.get('order', 'popular')
+        tags = self.model.objects.order_by('-created')
+        if order == 'popular':
+            tags = self.model.objects.annotate(
+                total=Count('question_tags')).order_by('-total')
+        elif order == 'name':
+            tags = self.model.objects.order_by(LowerCase('title').asc())
+        elif order == 'new':
+            tags = tags
+        return tags
 
     def page_range(self):
         return GenericPaginator(
@@ -45,9 +55,6 @@ class TagSearchOffset(ListView):
 
 class TagSearchJSON(JSONResponseMixin, TemplateView):
     model = Tag
-
-    def render_to_response(self, context, **response_kwargs):
-        return self.render_to_json_response(context, **response_kwargs)
 
     def get_queryset(self, query):
         return list(self.model.objects.filter(

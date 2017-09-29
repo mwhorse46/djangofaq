@@ -1,5 +1,8 @@
 {% load i18n %}
 
+<h3 class="ui top block attached header">{% trans "Edit comment:" %}</h3>
+<div class="ui attached segment module">{{ version2.revision.comment|default:"(no comment exists)" }}</div>
+
 {% for field_diff in compare_data %}
   <h3 class="ui top block attached header">{% firstof field_diff.field.verbose_name field_diff.field.related_name %}{% if field_diff.is_related and not field_diff.follow %}<sup class="follow">*</sup>{% endif %}</h3>
   {% if field_diff.field.help_text %}<p class="help">{{ field_diff.field.help_text }}</p>{% endif %}
@@ -16,9 +19,6 @@
     <p><strong>{% trans "There are no differences." %}</strong></p>
   </div>
 {% endfor %}
-
-<h4 class="ui top block attached header">{% trans "Edit comment:" %}</h4>
-<div class="ui attached segment module">{{ version2.revision.comment|default:"(no comment exists)" }}</div>
 
 {% if has_unfollowed_fields %}
 <div class="ui message warning">

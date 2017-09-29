@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n staticfiles %}
 {% load common_tags %}
-{% block title %}{% trans "Revision for" %} {{ question.title }} :: {{ block.super }}{% endblock %}
+{% block title %}{% trans "Revision for" %} {{ question_suggested_edits.title }} :: {{ block.super }}{% endblock %}
 
 {% block css %}
   <style type="text/css">
@@ -20,9 +20,9 @@
   <div class="page content">
     <div class="repo ribbon ribbon-detail">
       <div class="ui container">
-        <div class="ui massive breadcrumb breadcrumb-title-detail">{% trans "Revision for" %} "{{ question.title }}"</div>
+        <div class="ui massive breadcrumb breadcrumb-title-detail">{% trans "Revision for" %} "{{ question_suggested_edits.title }}"</div>
         <div class="repo options">
-          <a class="ui small button spf-link" href="{% url 'question_redirect' pk=question.pk %}">
+          <a class="ui small button spf-link" href="{% url 'question_redirect' pk=question_suggested_edits.question.pk %}">
             {% trans "Return to Question" %}
           </a>
         </div>

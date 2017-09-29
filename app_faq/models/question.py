@@ -58,7 +58,7 @@ class Question(TimeStampedModel):
         _('Slug'), max_length=200, unique=True)
 
     tags = models.ManyToManyField(
-        Tag, related_name='tags')
+        Tag, related_name='question_tags')
 
     STATUS_CHOICES = (
         ('approved', _('Approved')),
@@ -110,11 +110,10 @@ class Question(TimeStampedModel):
         super(Question, self).save(*args, **kwargs)
 
     def edits_object(self):
-        question = self
-        qs = QuestionSuggestedEdits.objects.filter(question=question)
+        qs = QuestionSuggestedEdits.objects.filter(question=self)
         if qs.exists():
             return qs.first()
-        return question
+        return None
 
     def get_comments(self):
         """ return all comments contains with this question """
