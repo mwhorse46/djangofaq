@@ -40,7 +40,7 @@ class CommentFormView(LoginRequiredMixin, FormView):
 
         context = {
             'status': True,
-            'author': self.request.user,
+            'author': self.request.user.username,
             'comment': initial.comment,
             'created': initial.created,
             'edited': initial.edited,

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load common_tags counter %}
+{% block title %}{{ tag.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}
   <div class="page content">
@@ -221,7 +222,9 @@
           <div class="sidebar-total-questions">
             <h2 class="ui grey header">
               {{ total_questions }}
-              <div class="sub header">questions</div>
+              <div class="sub header">
+                questions tagged <span class="ui small label no-radius">{{ tag }}</span>
+              </div>
             </h2>
           </div><!-- end /.sidebar-total-questions -->
 

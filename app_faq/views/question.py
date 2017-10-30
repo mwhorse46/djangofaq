@@ -50,6 +50,31 @@ class QuestionHomePage(ListView):
         return context
 
 
+class QuestionsTagged(ListView):
+    model = Question
+    context_object_name = 'questions'
+    paginate_by = settings.QUESTIONS_PER_PAGE
+    template_name = 'app_faq/question_taged.html'
+
+    def get_queryset(self):
+        self.tag = get_object_or_404(Tag, slug=self.kwargs['slug'])
+        return self.model.objects.published().filter(tags=self.tag).order_by('-created')
+
+    def page_range(self):
+        return GenericPaginator(
+            self.get_queryset(),
+            self.paginate_by,
+            self.request.GET.get('page')
+        ).get_page_range()
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionsTagged, self).get_context_data(**kwargs)
+        context['total_questions'] = self.get_queryset().count()
+        context['page_range'] = self.page_range()
+        context['tag'] = self.tag
+        return context
+
+
 class QuestionRedirectView(RedirectView):
 
     permanent = False

@@ -15,6 +15,11 @@ urlpatterns = [
         name='question_homepage'
     ),
     url(
+        r'^questions/tagged/(?P<slug>[\w-]+)/$',
+        QuestionsTagged.as_view(),
+        name='questions_tagged'
+    ),
+    url(
         r'^question/(?P<pk>[\d-]+)/$',
         QuestionRedirectView.as_view(),
         name='question_redirect'

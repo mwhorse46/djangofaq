@@ -68,4 +68,4 @@ class TagSearchJSON(JSONResponseMixin, TemplateView):
                 'success': True,
                 'results': self.get_queryset(query)
             })
-        return self.render_to_response(context)
+        return self.render_to_json_response(context)
