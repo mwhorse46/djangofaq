@@ -99,7 +99,6 @@ $(document).on('click', '.add-a-comment', function() {
     addComment($(this));
 });
 
-/*
 var sendComment = function(selector) {
   var selector_data = selector.data('target').split(':');
   var model_name = selector_data[0];
@@ -123,4 +122,3 @@ var sendComment = function(selector) {
 $(document).on('submit', '.comment-form', function() {
     sendComment($(this));
 });
-*/

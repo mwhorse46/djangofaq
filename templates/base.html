@@ -2,19 +2,20 @@
 <html class="no-js" lang="en-US" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8">
-  <meta name="robots" content="noodp,noydir"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta content='' property='fb:admins'/>
   <meta content='' property='fb:app_id'/>
+
+  {% block robot %}
+  <meta name="robots" content="noodp, noydir"/>
+  {% endblock %}
 
   <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}">
   <link href="/feed/" rel="alternate" type="application/rss+xml" title="Latest Feeds" />
 
   <title>{% block title %}Django F.A.Q{% endblock %}</title>
   <link rel="canonical" href="https://djangofaq.org{% block canonical %}{% endblock %}">
-
-  {% block robot %}{% endblock %}
 
   {% block seo %}
   <meta name="description" content="">
