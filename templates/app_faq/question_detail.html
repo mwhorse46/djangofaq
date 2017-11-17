@@ -30,15 +30,15 @@
         <div class="ui divided items">
           <div class="item item-question">
             <div class="stats">
-              <div class="vote-up stats-inside-detail">
+              <div class="vote-up stats-inside-detail" data-mode="question" data-id="{{ question.id }}">
                 <i class="triangle up big link grey icon"></i>
               </div>
-              <div class="vote-total stats-inside-detail">
+              <div class="vote-total stats-inside-detail" data-mode="question" data-id="{{ question.id }}">
                 <div class="value">
-                  304
+                  {{ question.rating.get_difference }}
                 </div>
               </div>
-              <div class="vote-down stats-inside-detail">
+              <div class="vote-down stats-inside-detail" data-mode="question" data-id="{{ question.id }}">
                 <i class="triangle down big link grey icon"></i>
               </div>
               <div class="favorite-icon stats-inside-detail">
@@ -216,15 +216,15 @@
           {% for answer in answers_question %}
             <div class="item item-answers no-border">
               <div class="stats">
-                <div class="vote-up stats-inside-detail">
+                <div class="vote-up stats-inside-detail" data-mode="answer" data-id="{{ answer.id }}">
                   <i class="triangle up big link orange icon"></i>
                 </div>
-                <div class="vote-total stats-inside-detail">
+                <div class="vote-total stats-inside-detail" data-mode="answer" data-id="{{ answer.id }}">
                   <div class="value">
-                    304
+                    {{ answer.rating.get_difference }}
                   </div>
                 </div>
-                <div class="vote-down stats-inside-detail">
+                <div class="vote-down stats-inside-detail" data-mode="answer" data-id="{{ answer.id }}">
                   <i class="triangle down big link grey icon"></i>
                 </div>
                 <div class="favorite-icon stats-inside-detail">

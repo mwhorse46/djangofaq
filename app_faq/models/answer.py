@@ -17,9 +17,11 @@ from app_faq.models.comment import Comment
 class AnswerQuerySet(models.QuerySet):
 
     def approved(self):
+        """ whenever the answer is correct according to the author of the question """
         return self.filter(status='approved')
 
     def duplicated(self):
+        """ mark/flag the answer as duplicated answer """
         return self.filter(status='duplicated')
 
     def pending(self):

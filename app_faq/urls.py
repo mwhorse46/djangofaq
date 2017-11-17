@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from updown.views import AddRatingFromModel
+
 from django.conf.urls import url
 from app_faq.views.question import *
 from app_faq.views.comment import *
@@ -94,5 +96,17 @@ urlpatterns = [
         r'^tags/search/json/$',
         TagSearchJSON.as_view(),
         name='tags_search_json'
+    ),
+
+    # updown url
+    url(
+        r'^question/(?P<object_id>\d+)/rate/(?P<score>[\d\-]+)$',
+        AddRatingFromModel(), {'app_label': 'app_faq', 'model': 'Question', 'field_name': 'rating'},
+        name='question_vote_rating'
+    ),
+    url(
+        r'^answer/(?P<object_id>\d+)/rate/(?P<score>[\d\-]+)$',
+        AddRatingFromModel(), {'app_label': 'app_faq', 'model': 'Answer', 'field_name': 'rating'},
+        name='answer_vote_rating'
     ),
 ]

@@ -122,3 +122,31 @@ var sendComment = function(selector) {
 $(document).on('submit', '.comment-form', function() {
     sendComment($(this));
 });
+
+
+// vote up and vote down the question or answer
+$(document).on('click', '.vote-up, .vote-down', function() {
+  var vote = $(this);
+  var mode = vote.data('mode');
+  var id = vote.data('id');
+  var voteUrl = '/'+mode+'/'+id+'/rate/';
+
+  if(vote.hasClass('vote-up')) {
+    voteUrl = voteUrl+'1';
+  }else{
+    voteUrl = voteUrl+'-1';
+  }
+
+  $.ajax({
+      url: voteUrl,
+      type: 'GET',
+      success: function(response) {
+        alert(response);
+        location.reload();
+      },
+      error: function(response) {
+        alert(response);
+        location.reload();
+      }
+  });
+});
